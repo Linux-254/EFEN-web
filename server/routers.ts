@@ -3,7 +3,7 @@ import { TRPCError } from "@trpc/server";
 import { COOKIE_NAME } from "@shared/const";
 import { previewProjects } from "./content";
 import { clearAdminSession, establishAdminSession, hasConfiguredAdminPin, isAdminSession } from "./adminAccess";
-import { createProject, deleteProject, getDb, listProjects, updateProject } from "./db";
+import { createProject, createSubmission, deleteProject, getSiteSettings, listProjects, listSubmissions, saveSiteSettings, updateProject, updateSubmissionStatus } from "./db";
 import { getSessionCookieOptions } from "./_core/cookies";
 import { systemRouter } from "./_core/systemRouter";
 import { publicProcedure, router } from "./_core/trpc";
@@ -19,6 +19,22 @@ const projectInput = z.object({
 });
 
 const projectUpdate = projectInput.partial().extend({ id: z.number().int().positive() });
+
+const submissionInput = z.object({
+  type: z.enum(["contact", "opportunity"]),
+  name: z.string().min(2).max(180),
+  email: z.string().email().max(320),
+  phone: z.string().max(80).optional().or(z.literal("")),
+  organization: z.string().max(180).optional().or(z.literal("")),
+  message: z.string().min(10).max(5000),
+  website: z.string().max(200).optional().or(z.literal("")),
+});
+
+const settingsInput = z.object({
+  faqs: z.array(z.object({ question: z.string().min(2).max(240), answer: z.string().min(2).max(3000) })).max(30),
+  socialLinks: z.array(z.object({ platform: z.string().min(2).max(40), url: z.string().url().or(z.literal("")) })).max(12),
+  contact: z.object({ email: z.string().email().or(z.literal("")), phone: z.string().max(80), address: z.string().max(240), safeguardingEmail: z.string().email().or(z.literal("")), safeguardingPhone: z.string().max(80) }),
+});
 
 const pinAdminProcedure = publicProcedure.use(({ ctx, next }) => {
   if (!isAdminSession(ctx.req)) {
@@ -52,6 +68,15 @@ export const appRouter = router({
       return rows.find((project) => project.slug === input.slug) ?? previewProjects.find((project) => project.slug === input.slug) ?? null;
     }),
   }),
+  site: router({
+    settings: publicProcedure.query(async () => getSiteSettings()),
+    submit: publicProcedure.input(submissionInput).mutation(async ({ input }) => {
+      if (input.website) return { success: true as const };
+      const { website: _website, ...submission } = input;
+      await createSubmission({ ...submission, phone: submission.phone || null, organization: submission.organization || null, status: "new" });
+      return { success: true as const };
+    }),
+  }),
   admin: router({
     status: publicProcedure.query(({ ctx }) => ({ authenticated: isAdminSession(ctx.req), pinConfigured: hasConfiguredAdminPin(), previewMode: process.env.NODE_ENV !== "production" && !process.env.EFEN_ADMIN_PIN })),
     login: publicProcedure.input(z.object({ pin: z.string().min(1).max(64) })).mutation(({ ctx, input }) => {
@@ -72,6 +97,10 @@ export const appRouter = router({
       return updateProject(id, { ...changes, imageUrl: changes.imageUrl || null });
     }),
     deleteProject: pinAdminProcedure.input(z.object({ id: z.number().int().positive() })).mutation(async ({ input }) => deleteProject(input.id)),
+    settings: pinAdminProcedure.query(async () => getSiteSettings()),
+    updateSettings: pinAdminProcedure.input(settingsInput).mutation(async ({ input }) => saveSiteSettings(input)),
+    submissions: pinAdminProcedure.query(async () => listSubmissions()),
+    updateSubmissionStatus: pinAdminProcedure.input(z.object({ id: z.number().int().positive(), status: z.enum(["new", "read", "archived"]) })).mutation(async ({ input }) => updateSubmissionStatus(input.id, input.status)),
   }),
 });
 

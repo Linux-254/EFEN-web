@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { ArrowUpRight, Facebook, Instagram, Linkedin, MapPin, MessageCircle, Twitter } from "lucide-react";
 import { Link, useLocation } from "wouter";
 import { toast } from "sonner";
+import { trpc } from "@/lib/trpc";
 
 export const logoPath = "/manus-storage/efen-logo-transparent_d5106309.png";
 export const lightLogoPath = "/manus-storage/efen-logo-light_d111099a.png";
@@ -39,11 +40,24 @@ export function PublicHeader() {
   );
 }
 
-export function SocialPlaceholder({ label, children }: { label: string; children: React.ReactNode }) {
+export function SocialPlaceholder({ label, url, children }: { label: string; url?: string; children: React.ReactNode }) {
+  if (url) return <a className="social-link" href={url} target="_blank" rel="noreferrer" aria-label={`EFEN on ${label}`}>{children}</a>;
   return <button className="social-link" type="button" aria-label={`${label} link coming soon`} onClick={() => toast(`${label} link will be added when EFEN confirms the official account.`)}>{children}</button>;
 }
 
+function socialIcon(platform: string) {
+  const key = platform.toLowerCase();
+  if (key.includes("facebook")) return <Facebook size={15} />;
+  if (key.includes("linkedin")) return <Linkedin size={15} />;
+  if (key === "x" || key.includes("twitter")) return <Twitter size={15} />;
+  if (key.includes("instagram")) return <Instagram size={15} />;
+  return <MessageCircle size={15} />;
+}
+
 export function PublicFooter() {
+  const settings = trpc.site.settings.useQuery();
+  const contact = settings.data?.contact;
+  const socialLinks = settings.data?.socialLinks ?? [];
   return (
     <footer className="public-footer">
       <div className="container public-footer-main">
@@ -51,16 +65,12 @@ export function PublicFooter() {
           <img src={lightLogoPath} alt="Eminent Friends Empowerment Network" />
           <p>Building stronger social connections and networks that empower people and communities to prosper.</p>
           <div className="footer-socials" aria-label="EFEN social links">
-            <SocialPlaceholder label="Facebook"><Facebook size={15} /></SocialPlaceholder>
-            <SocialPlaceholder label="LinkedIn"><Linkedin size={15} /></SocialPlaceholder>
-            <SocialPlaceholder label="X"><Twitter size={15} /></SocialPlaceholder>
-            <SocialPlaceholder label="Instagram"><Instagram size={15} /></SocialPlaceholder>
-            <SocialPlaceholder label="WhatsApp"><MessageCircle size={15} /></SocialPlaceholder>
+            {socialLinks.map((link) => <SocialPlaceholder key={link.platform} label={link.platform} url={link.url}>{socialIcon(link.platform)}</SocialPlaceholder>)}
           </div>
         </div>
         <div className="public-footer-links"><span>Explore</span><Link href="/about">About EFEN</Link><Link href="/work">Our work</Link><Link href="/faqs">FAQs</Link></div>
         <div className="public-footer-links"><span>Participate</span><Link href="/involved">Get involved</Link><Link href="/involved?type=partner">Partner with EFEN</Link><Link href="/safeguarding">Safeguarding</Link></div>
-        <div className="public-footer-location"><MapPin size={16} /><span>Head office<br /><strong>Soroti City, Eastern Uganda</strong></span></div>
+        <div className="public-footer-location"><MapPin size={16} /><span>Head office<br /><strong>{contact?.address || "Soroti City, Eastern Uganda"}</strong>{contact?.email && <><br /><a href={`mailto:${contact.email}`}>{contact.email}</a></>}{contact?.phone && <><br /><a href={`tel:${contact.phone}`}>{contact.phone}</a></>}</span></div>
       </div>
       <div className="container public-footer-bottom"><span>© EFEN — Eminent Friends Empowerment Network</span><span>Connect. Empower. Transform.</span><Link href="/privacy">Privacy &amp; safeguarding</Link></div>
     </footer>

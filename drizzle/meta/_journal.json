@@ -8,6 +8,13 @@
       "when": 1789513118933,
       "tag": "0000_curved_blade",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1789514389985,
+      "tag": "0001_gigantic_marvel_apes",
+      "breakpoints": true
     }
   ]
 }

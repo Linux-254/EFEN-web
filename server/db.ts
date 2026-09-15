@@ -1,6 +1,7 @@
-import { desc, eq } from "drizzle-orm";
+import { asc, desc, eq } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
-import { InsertProject, InsertUser, projects, users } from "../drizzle/schema";
+import { InsertProject, InsertSubmission, InsertUser, projects, siteSettings, submissions, users } from "../drizzle/schema";
+import { ContactSettings, defaultContactSettings, defaultFaqs, defaultSocialLinks, FaqItem, SocialLink } from "../shared/siteContent";
 import { ENV } from "./_core/env";
 
 let _db: ReturnType<typeof drizzle> | null = null;
@@ -95,4 +96,57 @@ export async function deleteProject(id: number) {
   if (!db) throw new Error("Database is not configured");
   await db.delete(projects).where(eq(projects.id, id));
   return { success: true as const };
+}
+
+export type EditableSiteSettings = { faqs: FaqItem[]; socialLinks: SocialLink[]; contact: ContactSettings };
+
+function parseJson<T>(value: string, fallback: T): T {
+  try {
+    return JSON.parse(value) as T;
+  } catch {
+    return fallback;
+  }
+}
+
+export async function getSiteSettings(): Promise<EditableSiteSettings> {
+  const db = await getDb();
+  if (!db) return { faqs: defaultFaqs, socialLinks: defaultSocialLinks, contact: defaultContactSettings };
+  const row = (await db.select().from(siteSettings).limit(1))[0];
+  if (!row) return { faqs: defaultFaqs, socialLinks: defaultSocialLinks, contact: defaultContactSettings };
+  return {
+    faqs: parseJson(row.faqs, defaultFaqs),
+    socialLinks: parseJson(row.socialLinks, defaultSocialLinks),
+    contact: parseJson(row.contact, defaultContactSettings),
+  };
+}
+
+export async function saveSiteSettings(input: EditableSiteSettings) {
+  const db = await getDb();
+  if (!db) throw new Error("Database is not configured");
+  const values = { faqs: JSON.stringify(input.faqs), socialLinks: JSON.stringify(input.socialLinks), contact: JSON.stringify(input.contact) };
+  const existing = (await db.select({ id: siteSettings.id }).from(siteSettings).limit(1))[0];
+  if (existing) await db.update(siteSettings).set(values).where(eq(siteSettings.id, existing.id));
+  else await db.insert(siteSettings).values(values);
+  return input;
+}
+
+export async function createSubmission(input: InsertSubmission) {
+  const db = await getDb();
+  if (!db) throw new Error("Database is not configured");
+  const result = await db.insert(submissions).values(input);
+  const id = Number(result[0].insertId);
+  return (await db.select().from(submissions).where(eq(submissions.id, id)).limit(1))[0];
+}
+
+export async function listSubmissions() {
+  const db = await getDb();
+  if (!db) return [];
+  return db.select().from(submissions).orderBy(desc(submissions.createdAt));
+}
+
+export async function updateSubmissionStatus(id: number, status: "new" | "read" | "archived") {
+  const db = await getDb();
+  if (!db) throw new Error("Database is not configured");
+  await db.update(submissions).set({ status }).where(eq(submissions.id, id));
+  return (await db.select().from(submissions).where(eq(submissions.id, id)).limit(1))[0];
 }

@@ -26,7 +26,31 @@ export const projects = mysqlTable("projects", {
   updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
 });
 
+export const siteSettings = mysqlTable("siteSettings", {
+  id: int("id").autoincrement().primaryKey(),
+  faqs: text("faqs").notNull(),
+  socialLinks: text("socialLinks").notNull(),
+  contact: text("contact").notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export const submissions = mysqlTable("submissions", {
+  id: int("id").autoincrement().primaryKey(),
+  type: mysqlEnum("type", ["contact", "opportunity"]).notNull(),
+  name: varchar("name", { length: 180 }).notNull(),
+  email: varchar("email", { length: 320 }).notNull(),
+  phone: varchar("phone", { length: 80 }),
+  organization: varchar("organization", { length: 180 }),
+  message: text("message").notNull(),
+  status: mysqlEnum("status", ["new", "read", "archived"]).default("new").notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
 export type User = typeof users.$inferSelect;
 export type InsertUser = typeof users.$inferInsert;
 export type Project = typeof projects.$inferSelect;
 export type InsertProject = typeof projects.$inferInsert;
+export type SiteSettings = typeof siteSettings.$inferSelect;
+export type InsertSiteSettings = typeof siteSettings.$inferInsert;
+export type Submission = typeof submissions.$inferSelect;
+export type InsertSubmission = typeof submissions.$inferInsert;

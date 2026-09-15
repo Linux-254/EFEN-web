@@ -227,3 +227,65 @@ h1 em, h2 em { color: #d39be2; font-style: italic; }
 .landing-logo-card img { filter: drop-shadow(0 0 7px rgba(74, 23, 72, .32)); }
 @media (max-width: 900px) { .public-brand { min-width: 220px; } .public-brand img { width: 112px; height: 70px; } }
 @media (max-width: 600px) { .public-brand { min-width: 200px; } .public-brand img { width: 106px; height: 66px; } }
+
+/* Contact workflow and editable content studio */
+.involved-form-section { padding: 120px 0; background: #f0e8e1; scroll-margin-top: 28px; }
+.involved-form-grid { display: grid; grid-template-columns: .82fr 1.18fr; gap: 100px; align-items: start; }
+.involved-form-intro h2 { max-width: 520px; margin: 22px 0 18px; color: var(--plum); font-family: "DM Serif Display", Georgia, serif; font-size: clamp(2.8rem, 4.6vw, 5rem); font-weight: 400; line-height: .95; letter-spacing: -.05em; }
+.involved-form-intro > p { max-width: 410px; color: #766a72; line-height: 1.7; }
+.official-contact-preview { display: grid; gap: 10px; margin-top: 37px; color: #776b72; font-size: 13px; }
+.official-contact-preview a, .official-contact-preview span { display: inline-flex; align-items: center; gap: 9px; color: var(--plum); text-decoration: none; }
+.contact-separator { width: 5px; height: 5px; border-radius: 50%; background: var(--magenta); }
+.involved-form-card { padding: 31px; background: #fffaf5; border: 1px solid rgba(52,38,49,.13); box-shadow: 0 18px 50px rgba(52,38,49,.08); }
+.involved-form-card form { display: grid; gap: 17px; }
+.form-type-toggle { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; margin-bottom: 5px; padding: 5px; background: #eee5df; }
+.form-type-toggle button { padding: 11px; border: 0; background: transparent; color: #806e79; font-size: 12px; font-weight: 700; cursor: pointer; }
+.form-type-toggle button.active { background: #fffaf5; color: var(--plum); box-shadow: 0 2px 8px rgba(52,38,49,.08); }
+.form-fields-two { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+.involved-form-card label { display: grid; color: var(--plum); font-size: 11px; font-weight: 700; }
+.involved-form-card label > span { color: #9a8c93; font-weight: 400; }
+.involved-form-card input, .involved-form-card textarea { width: 100%; margin-top: 6px; padding: 12px; border: 1px solid rgba(52,38,49,.18); border-radius: 0; outline: 0; background: #fff; color: var(--ink); font: inherit; }
+.involved-form-card input:focus, .involved-form-card textarea:focus { border-color: var(--magenta); box-shadow: 0 0 0 3px rgba(167,38,134,.1); }
+.form-honeypot { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.form-error { color: #a33a44; font-size: 12px; }
+.form-success { display: grid; justify-items: start; align-content: center; min-height: 410px; gap: 14px; color: var(--magenta); }
+.form-success h3 { margin: 0; color: var(--plum); font-family: "DM Serif Display", Georgia, serif; font-size: 32px; font-weight: 400; line-height: 1; }
+.form-success p { margin: 0 0 10px; color: #766a72; line-height: 1.6; }
+.public-footer-location a { color: rgba(255,255,255,.7); text-decoration: none; }
+.public-footer-location a:hover { color: #fff; }
+.admin-section-tabs { display: flex; flex-wrap: wrap; gap: 7px; margin: 38px 0 42px; padding-bottom: 13px; border-bottom: 1px solid rgba(52,38,49,.14); }
+.admin-section-tabs button { display: inline-flex; align-items: center; gap: 8px; padding: 11px 14px; border: 1px solid rgba(52,38,49,.14); background: #fffaf5; color: #806f7a; font-size: 12px; font-weight: 700; cursor: pointer; }
+.admin-section-tabs button.active { background: var(--plum); color: #fffaf5; border-color: var(--plum); }
+.admin-section-tabs b { display: grid; place-items: center; min-width: 18px; height: 18px; border-radius: 50%; background: #e9a9a4; color: #612835; font-size: 10px; }
+.admin-settings-panel, .admin-submissions-panel { display: grid; gap: 22px; }
+.admin-panel-heading { display: flex; justify-content: space-between; align-items: end; gap: 25px; }
+.admin-panel-heading h2 { margin: 14px 0 7px; color: var(--plum); font-family: "DM Serif Display", Georgia, serif; font-size: 38px; font-weight: 400; line-height: .96; }
+.admin-panel-heading p { margin: 0; color: #766a72; }
+.admin-settings-block { padding: 24px; background: #fffaf5; border: 1px solid rgba(52,38,49,.12); }
+.admin-settings-title { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 22px; color: var(--magenta); }
+.admin-settings-title > div { flex: 1; }
+.admin-settings-title h3 { margin: 0 0 3px; color: var(--plum); font-family: "DM Serif Display", Georgia, serif; font-size: 26px; font-weight: 400; }
+.admin-settings-title p { margin: 0; color: #887b82; font-size: 12px; }
+.small-admin-button { padding: 8px 10px; border: 1px solid rgba(52,38,49,.16); background: transparent; color: var(--plum); font-size: 11px; font-weight: 700; cursor: pointer; }
+.admin-settings-list { display: grid; gap: 14px; }
+.admin-faq-row { display: grid; grid-template-columns: 30px 1fr 32px; gap: 12px; align-items: start; padding-top: 14px; border-top: 1px solid rgba(52,38,49,.1); }
+.admin-faq-row > span { padding-top: 11px; color: #b18db2; font-size: 10px; }
+.admin-faq-row > div { display: grid; gap: 7px; }
+.admin-settings-block input, .admin-settings-block textarea { width: 100%; padding: 10px; border: 1px solid rgba(52,38,49,.16); background: #fff; color: var(--ink); font: inherit; font-size: 13px; }
+.admin-social-editor { display: grid; gap: 10px; }
+.admin-social-row { display: grid; grid-template-columns: .55fr 1fr 32px; gap: 9px; }
+.remove-setting { width: 32px; height: 32px; display: grid; place-items: center; border: 1px solid rgba(163,58,68,.22); background: transparent; color: #a33a44; cursor: pointer; }
+.admin-submissions-list { display: grid; gap: 12px; }
+.admin-submission-row { position: relative; padding: 22px; background: #fffaf5; border: 1px solid rgba(52,38,49,.12); }
+.submission-meta { display: flex; align-items: center; gap: 10px; color: #887b82; font-size: 10px; letter-spacing: .06em; text-transform: uppercase; }
+.submission-meta time { margin-left: auto; letter-spacing: 0; text-transform: none; }
+.admin-submission-row h3 { margin: 13px 0 2px; color: var(--plum); font-family: "DM Serif Display", Georgia, serif; font-size: 24px; font-weight: 400; }
+.admin-submission-row h3 a { color: var(--magenta); font-family: "DM Sans", sans-serif; font-size: 12px; font-weight: 600; }
+.submission-org { margin: 0; color: #887b82; font-size: 12px; }
+.submission-message { max-width: 780px; margin: 14px 0 17px; color: #665a63; line-height: 1.6; white-space: pre-wrap; }
+.admin-submission-row select { padding: 8px 10px; border: 1px solid rgba(52,38,49,.16); background: #fff; color: var(--plum); font: inherit; font-size: 12px; }
+.admin-empty-inbox { display: grid; justify-items: start; gap: 10px; padding: 48px 22px; background: #fffaf5; border: 1px dashed rgba(52,38,49,.18); color: var(--magenta); }
+.admin-empty-inbox h3 { margin: 0; color: var(--plum); font-family: "DM Serif Display", Georgia, serif; font-size: 28px; font-weight: 400; }
+.admin-empty-inbox p { margin: 0; color: #887b82; }
+@media (max-width: 900px) { .involved-form-grid { grid-template-columns: 1fr; gap: 45px; } .admin-panel-heading { align-items: flex-start; flex-direction: column; } }
+@media (max-width: 600px) { .form-fields-two, .admin-social-row { grid-template-columns: 1fr; } .involved-form-card { padding: 20px; } .admin-settings-block { padding: 17px; } .admin-faq-row { grid-template-columns: 24px 1fr 32px; gap: 8px; } .submission-meta { align-items: flex-start; flex-wrap: wrap; } .submission-meta time { width: 100%; margin-left: 0; } }
