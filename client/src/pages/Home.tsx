@@ -22,7 +22,7 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 
-const logoPath = "/manus-storage/efen-logo_4ad8ebe7.png";
+const logoPath = "/manus-storage/efen-logo-transparent_d5106309.png";
 
 const focusAreas = [
   {
@@ -119,14 +119,6 @@ export default function Home() {
 
   return (
     <div className="site-shell">
-      <div className="topline">
-        <div className="container topline-inner">
-          <span className="topline-mark"><span /> Soroti City, Eastern Uganda</span>
-          <span className="topline-message">Stronger connections. More possible futures.</span>
-          <button className="topline-link" onClick={() => scrollToId("involved")}>Find your way in <ArrowUpRight size={13} /></button>
-        </div>
-      </div>
-
       <header className={`site-header ${scrolled ? "site-header-scrolled" : ""}`}>
         <div className="container header-inner">
           <button className="brand-lockup" onClick={() => scrollToId("top")} aria-label="Back to top">
@@ -152,14 +144,12 @@ export default function Home() {
           <div className="hero-orb orb-two" />
           <div className="container hero-grid">
             <div className="hero-copy reveal">
-              <div className="eyebrow light"><span className="eyebrow-line" /> Community-powered development</div>
               <h1>Where a <em>connection</em> becomes a way forward.</h1>
               <p className="hero-lede">EFEN connects people to the skills, opportunities, mentors and networks that turn potential into progress.</p>
               <div className="hero-actions">
                 <button className="button button-light" onClick={() => scrollToId("work")}>Explore our work <ArrowDownRight size={17} /></button>
                 <button className="text-button light-text" onClick={() => scrollToId("about")}>Why connection matters <ArrowDownRight size={16} /></button>
               </div>
-              <div className="hero-note"><MapPin size={15} /> Building from Soroti City, Eastern Uganda</div>
             </div>
 
             <div className="hero-stage reveal" style={{ transitionDelay: "120ms" }}>
@@ -197,7 +187,6 @@ export default function Home() {
               <div className="stage-label label-bottom">01 / 04 — begin with people</div>
             </div>
           </div>
-          <div className="hero-footer container"><span>Scroll to follow the pathway</span><div className="scroll-line"><i /></div><span>01</span></div>
         </section>
 
         <section className="manifesto-section" id="about">
@@ -298,7 +287,6 @@ export default function Home() {
 
         <section className="safety-section" id="safeguarding">
           <div className="container safety-grid">
-            <div className="safety-intro reveal"><div className="safety-badge"><ShieldCheck size={19} /> People first</div><h2>Safety is part of the work, not a footnote.</h2><p>EFEN is committed to responsible, inclusive participation and to creating spaces where people can contribute with dignity and confidence.</p></div>
             <div className="safety-list reveal" style={{ transitionDelay: "100ms" }}>
               {["Child protection", "Protection from sexual exploitation, abuse & harassment", "Non-discrimination & safe participation", "Confidential reporting, responsible conduct & data privacy"].map((item, index) => <div className={`safety-item ${openSafeguard === index ? "open" : ""}`} key={item}><button onClick={() => setOpenSafeguard(openSafeguard === index ? null : index)}><span><Check size={15} /> {item}</span><ChevronDown size={18} /></button>{openSafeguard === index && <p>{index === 0 ? "Children deserve environments built around their safety, dignity and best interests." : index === 1 ? "We do not tolerate exploitation, abuse or harassment in any EFEN activity or partnership." : index === 2 ? "Participation should be safe, respectful and accessible to all people." : "People can raise concerns with care, confidentiality and responsible follow-through."}</p>}</div>)}
             </div>
@@ -306,7 +294,7 @@ export default function Home() {
         </section>
 
         <section className="closing-section">
-          <div className="container closing-inner reveal"><div className="closing-mark"><div className="closing-dot dot-a" /><div className="closing-dot dot-b" /><div className="closing-line line-a" /><div className="closing-line line-b" /></div><div className="eyebrow light"><span className="eyebrow-line" /> A shared invitation</div><h2>Start with one<br /><em>good connection.</em></h2><p>Stronger social connections and networks empower people and communities to prosper.</p><button className="button button-light" onClick={() => setConnectionOpen(true)}>Start a connection <ArrowUpRight size={17} /></button></div>
+          <div className="container closing-inner reveal"><div className="closing-mark"><div className="closing-dot dot-a" /><div className="closing-dot dot-b" /><div className="closing-line line-a" /><div className="closing-line line-b" /></div><h2>Start with one<br /><em>good connection.</em></h2><p>Stronger social connections and networks empower people and communities to prosper.</p><button className="button button-light" onClick={() => setConnectionOpen(true)}>Start a connection <ArrowUpRight size={17} /></button></div>
         </section>
       </main>
 
