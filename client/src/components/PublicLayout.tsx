@@ -3,6 +3,7 @@ import { ArrowUpRight, Facebook, Instagram, Linkedin, MapPin, MessageCircle, Twi
 import { Link, useLocation } from "wouter";
 import { toast } from "sonner";
 import { trpc } from "@/lib/trpc";
+import { defaultSocialLinks } from "../../../shared/siteContent";
 import logoAsset from "@/assets/efen-logo-transparent.png";
 import lightLogoAsset from "@/assets/efen-logo-light.png";
 
@@ -69,7 +70,7 @@ function socialIcon(platform: string) {
 export function PublicFooter() {
   const settings = trpc.site.settings.useQuery();
   const contact = settings.data?.contact;
-  const socialLinks = settings.data?.socialLinks ?? [];
+  const socialLinks = settings.data?.socialLinks?.length ? settings.data.socialLinks : defaultSocialLinks;
   return (
     <footer className="public-footer">
       <div className="container public-footer-main">
