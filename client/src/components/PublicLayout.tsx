@@ -84,5 +84,5 @@ export function PublicLayout({ children }: { children: React.ReactNode }) {
 }
 
 export function PageIntro({ eyebrow, title, copy, dark = false }: { eyebrow: string; title: React.ReactNode; copy: string; dark?: boolean }) {
-  return <section className={`page-intro ${dark ? "page-intro-dark" : ""}`}><div className="brand-pattern" /><div className="container page-intro-inner"><div className="eyebrow"><span className="eyebrow-line" /> {eyebrow}</div><h1>{title}</h1><p>{copy}</p></div></section>;
+  return <section className={`page-intro ${dark ? "page-intro-dark" : ""}`}><div className="brand-pattern" /><div className="container page-intro-inner">{eyebrow && <div className="eyebrow"><span className="eyebrow-line" /> {eyebrow}</div>}<h1>{title}</h1><p>{copy}</p></div></section>;
 }
