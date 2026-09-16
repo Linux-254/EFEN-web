@@ -126,6 +126,6 @@ export function clearAdminSession(res: Response) {
 }
 
 export function hasConfiguredAdminPin() {
-  return true;
+  return Boolean(ENV.adminPin);
 }
 
