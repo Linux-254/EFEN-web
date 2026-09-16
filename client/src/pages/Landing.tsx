@@ -1,4 +1,4 @@
-import { ArrowDownRight, ArrowUpRight, Handshake, LockKeyhole, Network, Sparkles, UsersRound } from "lucide-react";
+import { ArrowDownRight, ArrowUpRight, Handshake, Network, Sparkles, UsersRound } from "lucide-react";
 import { Link } from "wouter";
 import { PublicLayout, logoPath, usePageMeta } from "@/components/PublicLayout";
 import { trpc } from "@/lib/trpc";
@@ -27,9 +27,7 @@ export default function Landing() {
               </div>
             ) : (
               <div className="landing-network">
-                <Link href="/manage-efen" className="network-center" title="Admin Studio" aria-label="Admin Portal">
-                  <Network size={23} />
-                </Link>
+                <div className="network-center" aria-hidden="true"><Network size={23} /></div>
                 <i className="network-dot dot-1" />
                 <i className="network-dot dot-2" />
                 <i className="network-dot dot-3" />
@@ -42,9 +40,6 @@ export default function Landing() {
             <div className="landing-logo-card">
               <img src={logoPath} alt="EFEN" />
               <span>{teamCaption}</span>
-              <Link href="/manage-efen" className="secret-admin-trigger" title="Admin Studio" aria-label="Admin Studio">
-                <LockKeyhole size={12} /> <span>Admin</span>
-              </Link>
             </div>
           </div>
         </div>

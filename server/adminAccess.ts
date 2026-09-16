@@ -65,7 +65,7 @@ function readCookie(req: Request) {
 }
 
 function validPin(pin: string) {
-  const configured = ENV.adminPin || "8429@ef3n26";
+  const configured = ENV.adminPin;
   if (!configured || !pin) return false;
   // Constant-time comparison using fixed 32-byte SHA-256 digests prevents timing side channels
   const receivedHash = createHash("sha256").update(pin).digest();
