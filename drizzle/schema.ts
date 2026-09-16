@@ -21,6 +21,7 @@ export const projects = mysqlTable("projects", {
   category: varchar("category", { length: 100 }).notNull(),
   status: mysqlEnum("status", ["draft", "published"]).default("published").notNull(),
   imageUrl: varchar("imageUrl", { length: 500 }),
+  imageUrls: text("imageUrls"),
   publishedAt: timestamp("publishedAt").defaultNow().notNull(),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
@@ -37,6 +38,7 @@ export const siteSettings = mysqlTable("siteSettings", {
 export const submissions = mysqlTable("submissions", {
   id: int("id").autoincrement().primaryKey(),
   type: mysqlEnum("type", ["contact", "opportunity"]).notNull(),
+  pathway: varchar("pathway", { length: 40 }).notNull().default("opportunity"),
   name: varchar("name", { length: 180 }).notNull(),
   email: varchar("email", { length: 320 }).notNull(),
   phone: varchar("phone", { length: 80 }),

@@ -13,5 +13,6 @@ describe("site.settings", () => {
     expect(result.faqs.length).toBeGreaterThan(0);
     expect(result.socialLinks.length).toBeGreaterThan(0);
     expect(result.contact).toHaveProperty("address");
+    expect(result.contact).toHaveProperty("whatsapp");
   });
 });

@@ -113,10 +113,11 @@ export async function getSiteSettings(): Promise<EditableSiteSettings> {
   if (!db) return { faqs: defaultFaqs, socialLinks: defaultSocialLinks, contact: defaultContactSettings };
   const row = (await db.select().from(siteSettings).limit(1))[0];
   if (!row) return { faqs: defaultFaqs, socialLinks: defaultSocialLinks, contact: defaultContactSettings };
+  const storedContact = parseJson<Partial<ContactSettings>>(row.contact, {});
   return {
     faqs: parseJson(row.faqs, defaultFaqs),
     socialLinks: parseJson(row.socialLinks, defaultSocialLinks),
-    contact: parseJson(row.contact, defaultContactSettings),
+    contact: { ...defaultContactSettings, ...storedContact },
   };
 }
 

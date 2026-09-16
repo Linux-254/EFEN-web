@@ -3,6 +3,7 @@ export type SocialLink = { platform: string; url: string };
 export type ContactSettings = {
   email: string;
   phone: string;
+  whatsapp: string;
   address: string;
   safeguardingEmail: string;
   safeguardingPhone: string;
@@ -29,6 +30,7 @@ export const defaultSocialLinks: SocialLink[] = [
 export const defaultContactSettings: ContactSettings = {
   email: "",
   phone: "",
+  whatsapp: "",
   address: "Soroti City, Eastern Uganda",
   safeguardingEmail: "",
   safeguardingPhone: "",

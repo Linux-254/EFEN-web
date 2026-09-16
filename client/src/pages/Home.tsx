@@ -21,8 +21,9 @@ import {
   X,
 } from "lucide-react";
 import { toast } from "sonner";
+import logoAsset from "@/assets/efen-logo-transparent.png";
 
-const logoPath = "/manus-storage/efen-logo-transparent_d5106309.png";
+const logoPath = logoAsset;
 
 const focusAreas = [
   {
