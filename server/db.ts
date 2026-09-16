@@ -1,7 +1,7 @@
 import { asc, desc, eq } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
 import { InsertProject, InsertSubmission, InsertUser, projects, siteSettings, submissions, users } from "../drizzle/schema";
-import { ContactSettings, defaultContactSettings, defaultFaqs, defaultSocialLinks, FaqItem, SocialLink } from "../shared/siteContent";
+import { AboutContent, ContactSettings, defaultAboutContent, defaultContactSettings, defaultFaqs, defaultSocialLinks, FaqItem, SocialLink } from "../shared/siteContent";
 import { ENV } from "./_core/env";
 
 let _db: ReturnType<typeof drizzle> | null = null;
@@ -98,7 +98,7 @@ export async function deleteProject(id: number) {
   return { success: true as const };
 }
 
-export type EditableSiteSettings = { faqs: FaqItem[]; socialLinks: SocialLink[]; contact: ContactSettings };
+export type EditableSiteSettings = { faqs: FaqItem[]; socialLinks: SocialLink[]; contact: ContactSettings; about: AboutContent };
 
 function parseJson<T>(value: string, fallback: T): T {
   try {
@@ -110,21 +110,22 @@ function parseJson<T>(value: string, fallback: T): T {
 
 export async function getSiteSettings(): Promise<EditableSiteSettings> {
   const db = await getDb();
-  if (!db) return { faqs: defaultFaqs, socialLinks: defaultSocialLinks, contact: defaultContactSettings };
+  if (!db) return { faqs: defaultFaqs, socialLinks: defaultSocialLinks, contact: defaultContactSettings, about: defaultAboutContent };
   const row = (await db.select().from(siteSettings).limit(1))[0];
-  if (!row) return { faqs: defaultFaqs, socialLinks: defaultSocialLinks, contact: defaultContactSettings };
+  if (!row) return { faqs: defaultFaqs, socialLinks: defaultSocialLinks, contact: defaultContactSettings, about: defaultAboutContent };
   const storedContact = parseJson<Partial<ContactSettings>>(row.contact, {});
   return {
     faqs: parseJson(row.faqs, defaultFaqs),
     socialLinks: parseJson(row.socialLinks, defaultSocialLinks),
     contact: { ...defaultContactSettings, ...storedContact },
+    about: { ...defaultAboutContent, ...parseJson<Partial<AboutContent>>(row.about, {}) },
   };
 }
 
 export async function saveSiteSettings(input: EditableSiteSettings) {
   const db = await getDb();
   if (!db) throw new Error("Database is not configured");
-  const values = { faqs: JSON.stringify(input.faqs), socialLinks: JSON.stringify(input.socialLinks), contact: JSON.stringify(input.contact) };
+  const values = { faqs: JSON.stringify(input.faqs), socialLinks: JSON.stringify(input.socialLinks), contact: JSON.stringify(input.contact), about: JSON.stringify(input.about) };
   const existing = (await db.select({ id: siteSettings.id }).from(siteSettings).limit(1))[0];
   if (existing) await db.update(siteSettings).set(values).where(eq(siteSettings.id, existing.id));
   else await db.insert(siteSettings).values(values);

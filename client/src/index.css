@@ -174,6 +174,7 @@ h1 em, h2 em { color: #d39be2; font-style: italic; }
 .public-header-dark .public-brand { color: #fffaf5; }
 .public-brand img { width: 104px; height: 68px; object-fit: contain; filter: drop-shadow(0 0 8px rgba(255,255,255,.58)); }
 .public-brand span { display: grid; font-size: 10px; letter-spacing: .13em; line-height: 1.25; text-transform: uppercase; font-weight: 700; }
+.public-brand-name { font-size: 18px !important; font-weight: 600 !important; letter-spacing: .08em !important; margin-left: 5px; }
 .public-brand i { width: 26px; height: 1px; margin: 5px 0 4px; background: #a96bb8; }
 .public-nav { display: flex; align-items: center; gap: 27px; margin-left: auto; }
 .public-nav a { color: #766b72; text-decoration: none; font-size: 13px; transition: color .18s ease; }
@@ -312,3 +313,17 @@ h1 em, h2 em { color: #d39be2; font-style: italic; }
 .project-detail-gallery img { width: 100%; height: 180px; display: block; object-fit: cover; }
 .project-detail-gallery img:first-child { grid-column: 1 / -1; height: 260px; }
 @media (max-width: 600px) { .direct-contact-actions { flex-direction: column; align-items: stretch; } .admin-image-editor-head { flex-direction: column; } .project-detail-gallery { grid-template-columns: 1fr; } .project-detail-gallery img, .project-detail-gallery img:first-child { height: 220px; grid-column: auto; } }
+
+/* Subtle interior-page texture and content metadata */
+.public-site { background-color: var(--paper); background-image: radial-gradient(rgba(110,40,109,.055) .7px, transparent .7px), linear-gradient(120deg, transparent 0 43%, rgba(110,40,109,.025) 43.1% 43.25%, transparent 43.4%); background-size: 24px 24px, 420px 420px; }
+.page-intro, .content-section, .projects-section, .project-detail-section, .involved-page-section, .involved-form-section, .values-section { background-color: rgba(251,249,245,.82); }
+.admin-row-actions button { display: inline-flex; align-items: center; gap: 7px; }
+.admin-row-actions button span { font-size: 11px; font-weight: 700; white-space: nowrap; }
+.admin-image-fields { display: grid; gap: 7px; min-width: 0; }
+.admin-image-fields input { width: 100%; }
+.project-detail-gallery figure { margin: 0; }
+.project-detail-gallery figcaption { margin-top: 7px; color: #776b72; font-size: 11px; line-height: 1.45; }
+.form-success { animation: success-rise .35s var(--ease-out) both; }
+.form-success svg { color: #7a2f75; }
+@keyframes success-rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+@media (max-width: 600px) { .admin-row-actions button span { display: none; } }

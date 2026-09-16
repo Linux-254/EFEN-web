@@ -1,5 +1,7 @@
 export type FaqItem = { question: string; answer: string };
 export type SocialLink = { platform: string; url: string };
+export type AboutContent = { intro: string; purposeTitle: string; purposeLead: string; purposeBody: string; vision: string; mission: string; valuesTitle: string; beliefsTitle: string };
+export type ProjectImageMeta = { url: string; caption: string; alt: string };
 export type ContactSettings = {
   email: string;
   phone: string;
@@ -20,18 +22,17 @@ export const defaultFaqs: FaqItem[] = [
 ];
 
 export const defaultSocialLinks: SocialLink[] = [
-  { platform: "Facebook", url: "" },
-  { platform: "LinkedIn", url: "" },
-  { platform: "X", url: "" },
-  { platform: "Instagram", url: "" },
-  { platform: "WhatsApp", url: "" },
+  { platform: "Facebook", url: "" }, { platform: "LinkedIn", url: "" }, { platform: "X", url: "" }, { platform: "Instagram", url: "" }, { platform: "WhatsApp", url: "" },
 ];
 
-export const defaultContactSettings: ContactSettings = {
-  email: "",
-  phone: "",
-  whatsapp: "",
-  address: "Soroti City, Eastern Uganda",
-  safeguardingEmail: "",
-  safeguardingPhone: "",
+export const defaultContactSettings: ContactSettings = { email: "", phone: "", whatsapp: "", address: "Soroti City, Eastern Uganda", safeguardingEmail: "", safeguardingPhone: "" };
+export const defaultAboutContent: AboutContent = {
+  intro: "Eminent Friends Empowerment Network is a non-profit, non-political, non-sectarian and community-focused organization based in Soroti City, Eastern Uganda.",
+  purposeTitle: "Building bridges between people and opportunity.",
+  purposeLead: "We believe stronger relationships can open practical pathways to livelihoods, leadership, participation and lasting change.",
+  purposeBody: "EFEN brings together communities, young people, professionals, mentors, institutions, businesses, development partners and other stakeholders to create a more inclusive, resilient and prosperous future.",
+  vision: "A world with stronger social connections and networks that empower people and communities to prosper.",
+  mission: "To empower individuals and communities through friendship and stronger social connections, advancing inclusive development, sustainable livelihoods, ethical leadership, innovation and partnerships for lasting prosperity.",
+  valuesTitle: "Values are the way the work feels.",
+  beliefsTitle: "Connect. Empower. Act. Transform.",
 };

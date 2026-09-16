@@ -17,6 +17,7 @@ const projectInput = z.object({
   status: z.enum(["draft", "published"]).default("published"),
   imageUrl: z.string().url().or(z.literal("")).nullable().optional(),
   imageUrls: z.array(z.string().url()).max(5).default([]),
+  imageMeta: z.array(z.object({ url: z.string().url(), caption: z.string().max(240), alt: z.string().max(240) })).max(5).default([]),
 });
 
 const projectUpdate = projectInput.partial().extend({ id: z.number().int().positive() });
@@ -36,6 +37,7 @@ const settingsInput = z.object({
   faqs: z.array(z.object({ question: z.string().min(2).max(240), answer: z.string().min(2).max(3000) })).max(30),
   socialLinks: z.array(z.object({ platform: z.string().min(2).max(40), url: z.string().url().or(z.literal("")) })).max(12),
   contact: z.object({ email: z.string().email().or(z.literal("")), phone: z.string().max(80), whatsapp: z.string().max(80), address: z.string().max(240), safeguardingEmail: z.string().email().or(z.literal("")), safeguardingPhone: z.string().max(80) }),
+  about: z.object({ intro: z.string().min(10).max(1000), purposeTitle: z.string().min(2).max(240), purposeLead: z.string().min(10).max(1000), purposeBody: z.string().min(10).max(1500), vision: z.string().min(10).max(1000), mission: z.string().min(10).max(1500), valuesTitle: z.string().min(2).max(240), beliefsTitle: z.string().min(2).max(240) }),
 });
 
 const pinAdminProcedure = publicProcedure.use(({ ctx, next }) => {
@@ -94,13 +96,13 @@ export const appRouter = router({
       return rows.length ? rows : previewProjects;
     }),
     createProject: pinAdminProcedure.input(projectInput).mutation(async ({ input }) => {
-      const { imageUrls, ...rest } = input;
-      return createProject({ ...rest, imageUrl: rest.imageUrl || imageUrls[0] || null, imageUrls: JSON.stringify(imageUrls) });
+      const { imageUrls, imageMeta, ...rest } = input;
+      return createProject({ ...rest, imageUrl: rest.imageUrl || imageUrls[0] || null, imageUrls: JSON.stringify(imageUrls), imageMeta: JSON.stringify(imageMeta) });
     }),
     updateProject: pinAdminProcedure.input(projectUpdate).mutation(async ({ input }) => {
       const { id, ...changes } = input;
-      const { imageUrls, ...rest } = changes;
-      return updateProject(id, { ...rest, imageUrl: rest.imageUrl || imageUrls?.[0] || null, imageUrls: imageUrls ? JSON.stringify(imageUrls) : undefined });
+      const { imageUrls, imageMeta, ...rest } = changes;
+      return updateProject(id, { ...rest, imageUrl: rest.imageUrl || imageUrls?.[0] || null, imageUrls: imageUrls ? JSON.stringify(imageUrls) : undefined, imageMeta: imageMeta ? JSON.stringify(imageMeta) : undefined });
     }),
     deleteProject: pinAdminProcedure.input(z.object({ id: z.number().int().positive() })).mutation(async ({ input }) => deleteProject(input.id)),
     settings: pinAdminProcedure.query(async () => getSiteSettings()),

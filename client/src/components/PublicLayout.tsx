@@ -31,7 +31,7 @@ export function PublicHeader() {
       <div className="container public-header-inner">
         <Link href="/" className="public-brand" aria-label="EFEN home">
           <img src={location === "/" ? lightLogoPath : logoPath} alt="Eminent Friends Empowerment Network" />
-          <span>EFEN <i /> Soroti, Uganda</span>
+          <span className="public-brand-name">EFEN</span>
         </Link>
         <nav className="public-nav" aria-label="Primary navigation">
           {navItems.map(([label, href]) => <Link href={href} className={location === href ? "active" : ""} key={href}>{label}</Link>)}
