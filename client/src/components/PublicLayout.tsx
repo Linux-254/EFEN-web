@@ -47,12 +47,22 @@ export function SocialPlaceholder({ label, url, children }: { label: string; url
   return <button className="social-link" type="button" aria-label={`${label} link coming soon`} onClick={() => toast(`${label} link will be added when EFEN confirms the official account.`)}>{children}</button>;
 }
 
+// Inline TikTok SVG icon since Lucide doesn't include it
+function TikTokIcon({ size = 15 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.2 8.2 0 0 0 4.78 1.52V6.77a4.85 4.85 0 0 1-1.01-.08z"/>
+    </svg>
+  );
+}
+
 function socialIcon(platform: string) {
   const key = platform.toLowerCase();
   if (key.includes("facebook")) return <Facebook size={15} />;
   if (key.includes("linkedin")) return <Linkedin size={15} />;
   if (key === "x" || key.includes("twitter")) return <Twitter size={15} />;
   if (key.includes("instagram")) return <Instagram size={15} />;
+  if (key.includes("tiktok")) return <TikTokIcon size={15} />;
   return <MessageCircle size={15} />;
 }
 

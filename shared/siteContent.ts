@@ -1,6 +1,18 @@
 export type FaqItem = { question: string; answer: string };
 export type SocialLink = { platform: string; url: string };
-export type AboutContent = { intro: string; purposeTitle: string; purposeLead: string; purposeBody: string; vision: string; mission: string; valuesTitle: string; beliefsTitle: string };
+export type AboutContent = {
+  intro: string;
+  purposeTitle: string;
+  purposeLead: string;
+  purposeBody: string;
+  vision: string;
+  mission: string;
+  valuesTitle: string;
+  beliefsTitle: string;
+  teamIntroImageUrl?: string;
+  teamIntroTitle?: string;
+  teamIntroCaption?: string;
+};
 export type ProjectImageMeta = { url: string; caption: string; alt: string };
 export type ContactSettings = {
   email: string;
@@ -22,7 +34,12 @@ export const defaultFaqs: FaqItem[] = [
 ];
 
 export const defaultSocialLinks: SocialLink[] = [
-  { platform: "Facebook", url: "" }, { platform: "LinkedIn", url: "" }, { platform: "X", url: "" }, { platform: "Instagram", url: "" }, { platform: "WhatsApp", url: "" },
+  { platform: "Facebook", url: "https://www.facebook.com/eminentfen" },
+  { platform: "LinkedIn", url: "" },
+  { platform: "X", url: "https://x.com/eminentfen" },
+  { platform: "Instagram", url: "" },
+  { platform: "WhatsApp", url: "" },
+  { platform: "TikTok", url: "https://www.tiktok.com/@eminentefen" },
 ];
 
 export const defaultContactSettings: ContactSettings = { email: "", phone: "", whatsapp: "", address: "Soroti City, Eastern Uganda", safeguardingEmail: "", safeguardingPhone: "" };
@@ -35,4 +52,7 @@ export const defaultAboutContent: AboutContent = {
   mission: "To empower individuals and communities through friendship and stronger social connections, advancing inclusive development, sustainable livelihoods, ethical leadership, innovation and partnerships for lasting prosperity.",
   valuesTitle: "Values are the way the work feels.",
   beliefsTitle: "Connect. Empower. Act. Transform.",
+  teamIntroImageUrl: "",
+  teamIntroTitle: "A network in motion",
+  teamIntroCaption: "Connect. Empower. Transform.",
 };

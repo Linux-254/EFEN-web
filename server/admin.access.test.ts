@@ -5,21 +5,23 @@ function requestWithCookie(cookie?: string) {
   return { headers: { cookie } } as never;
 }
 
-describe("EFEN admin PIN session", () => {
-  it("creates a valid signed session for the preview PIN", () => {
+describe("EFEN admin session security", () => {
+  it("creates a valid signed session for the secure password", () => {
     let cookie = "";
     const response = {
       cookie: (_name: string, value: string) => { cookie = `efen_admin=${value}`; },
     } as never;
 
-    expect(establishAdminSession({} as never, response, "2468")).toBe(true);
+    const result = establishAdminSession({} as never, response, "8429@ef3n26");
+    expect(result.success).toBe(true);
     expect(cookie).toContain("efen_admin=");
     expect(isAdminSession(requestWithCookie(cookie))).toBe(true);
   });
 
-  it("rejects the wrong PIN and a missing session", () => {
+  it("rejects an incorrect password and maintains security", () => {
     const response = { cookie: () => undefined } as never;
-    expect(establishAdminSession({} as never, response, "0000")).toBe(false);
+    const result = establishAdminSession({} as never, response, "wrong-password");
+    expect(result.success).toBe(false);
     expect(isAdminSession(requestWithCookie())).toBe(false);
   });
 });

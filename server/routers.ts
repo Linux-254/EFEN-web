@@ -84,8 +84,7 @@ export const appRouter = router({
   admin: router({
     status: publicProcedure.query(({ ctx }) => ({ authenticated: isAdminSession(ctx.req), pinConfigured: hasConfiguredAdminPin(), previewMode: process.env.NODE_ENV !== "production" && !process.env.EFEN_ADMIN_PIN })),
     login: publicProcedure.input(z.object({ pin: z.string().min(1).max(64) })).mutation(({ ctx, input }) => {
-      const success = establishAdminSession(ctx.req, ctx.res, input.pin);
-      return { success };
+      return establishAdminSession(ctx.req, ctx.res, input.pin);
     }),
     logout: publicProcedure.mutation(({ ctx }) => {
       clearAdminSession(ctx.res);

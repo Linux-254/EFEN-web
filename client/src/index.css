@@ -327,3 +327,255 @@ h1 em, h2 em { color: #d39be2; font-style: italic; }
 .form-success svg { color: #7a2f75; }
 @keyframes success-rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 @media (max-width: 600px) { .admin-row-actions button span { display: none; } }
+
+/* =====================================================
+   PREMIUM INNER-PAGE COLOR & UI ENHANCEMENTS
+   ===================================================== */
+
+/* Colorful page intros for non-home pages */
+.public-header-light {
+  background: linear-gradient(135deg, #fff 0%, #fdf8ff 100%);
+  border-bottom: 1px solid rgba(110,40,109,.12);
+  box-shadow: 0 2px 20px rgba(110,40,109,.06);
+}
+.public-header-light .public-brand { color: var(--plum); }
+.public-header-light .public-nav a { color: #5a4d5a; }
+
+/* Vibrant gradient page intro banners */
+.page-intro {
+  background: linear-gradient(140deg, #f9f3fe 0%, #fdf0fa 35%, #f0f4ff 70%, #fbf9f5 100%) !important;
+  border-bottom: 1px solid rgba(110,40,109,.08);
+}
+.page-intro::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 80% 20%, rgba(167,38,134,.08) 0%, transparent 55%),
+    radial-gradient(ellipse at 10% 80%, rgba(110,40,109,.06) 0%, transparent 50%);
+  pointer-events: none;
+}
+.page-intro .eyebrow { color: var(--magenta); }
+.page-intro h1 { color: var(--plum); }
+
+/* Accent stripe under eyebrow on inner pages */
+.eyebrow-line { background: linear-gradient(90deg, var(--magenta), var(--violet)); opacity: 1; }
+
+/* Enhanced content sections with color accents */
+.content-section { background: #fffaf5 !important; }
+.content-section h2 { position: relative; }
+
+/* Mission / beliefs band — richer gradient */
+.mission-band, .partner-band, .beliefs-section, .work-approach {
+  background: linear-gradient(135deg, var(--deep-plum) 0%, #5f2d67 50%, #7a3580 100%) !important;
+  position: relative;
+  overflow: hidden;
+}
+.mission-band::before, .partner-band::before, .beliefs-section::before, .work-approach::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255,255,255,.07) .8px, transparent .8px);
+  background-size: 22px 22px;
+  pointer-events: none;
+}
+.mission-band::after {
+  content: "";
+  position: absolute;
+  width: 500px; height: 500px;
+  right: -100px; top: -150px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(214,162,224,.18), transparent 65%);
+  pointer-events: none;
+}
+
+/* Values section — colorful grid cards */
+.values-grid article { transition: background .2s var(--ease-out), transform .2s var(--ease-out), box-shadow .2s var(--ease-out); }
+.values-grid article:hover { background: #fff; transform: translateY(-5px); box-shadow: 0 14px 32px rgba(110,40,109,.1); }
+.values-grid article:nth-child(1) { border-top: 3px solid var(--magenta); }
+.values-grid article:nth-child(2) { border-top: 3px solid var(--violet); }
+.values-grid article:nth-child(3) { border-top: 3px solid var(--gold); }
+.values-grid article:nth-child(4) { border-top: 3px solid var(--plum); }
+
+/* Projects section — richer cards */
+.project-card { border-radius: 8px; overflow: hidden; }
+.project-card:hover { box-shadow: 0 22px 50px rgba(52,38,49,.14); }
+.projects-section {
+  background: linear-gradient(180deg, #fbf9f5 0%, #f5f0f8 100%) !important;
+}
+.projects-section .section-heading-simple h2 { color: var(--plum); }
+
+/* Work approach section — vibrant gradient */
+.work-approach {
+  background: linear-gradient(135deg, #3e1a52 0%, #5f2d67 40%, #862e7c 100%) !important;
+}
+.work-approach h2 { color: #fff; }
+.work-approach p { color: rgba(255,255,255,.72); }
+
+/* FAQ section — accent colors */
+.faq-section { background: linear-gradient(160deg, #fdf8ff 0%, #f8f5ff 60%, #fff8fd 100%) !important; }
+.faq-item.open { background: #fffaf5; }
+.faq-item button { transition: color .18s ease; }
+.faq-item.open button { color: var(--magenta); }
+.faq-item button svg { color: var(--magenta); }
+
+/* Get Involved page — colorful cards */
+.involved-page-section {
+  background: linear-gradient(155deg, #f9f3fe 0%, #fdf5fb 50%, #f0f4ff 100%) !important;
+}
+.involved-page-card { border-radius: 10px; }
+.involved-page-card:nth-child(1) { border-top: 3px solid var(--magenta); }
+.involved-page-card:nth-child(2) { border-top: 3px solid var(--violet); }
+.involved-page-card:nth-child(3) { border-top: 3px solid var(--gold); }
+.involved-page-card:nth-child(4) { border-top: 3px solid #4a9d7c; }
+.involved-page-card svg { color: var(--magenta); }
+.involved-page-card:nth-child(2) svg { color: var(--violet); }
+.involved-page-card:nth-child(3) svg { color: var(--gold); }
+.involved-page-card:nth-child(4) svg { color: #4a9d7c; }
+
+/* Involved form section */
+.involved-form-section {
+  background: linear-gradient(135deg, #f0e8f5 0%, #ede0f3 50%, #e8e1da 100%) !important;
+}
+.involved-form-card { border-radius: 10px; }
+
+/* Partner band */
+.partner-band {
+  background: linear-gradient(135deg, #241029 0%, #3f1b44 50%, #5a2460 100%) !important;
+}
+
+/* About page beliefs section */
+.beliefs-section { background: linear-gradient(135deg, var(--plum) 0%, #7a3580 100%) !important; }
+.beliefs-list p { border-bottom-color: rgba(255,255,255,.14); }
+.beliefs-list p:hover { background: rgba(255,255,255,.04); border-radius: 6px; padding-left: 8px; transition: all .2s ease; }
+
+/* Colorful footer social icons */
+.social-link { border-color: rgba(255,255,255,.25); transition: transform .18s var(--ease-out), background .18s ease, border-color .18s ease; }
+.social-link:hover { border-color: rgba(255,255,255,.55); background: rgba(255,255,255,.14); transform: translateY(-3px); }
+
+/* Project detail section */
+.project-detail-section {
+  background: linear-gradient(160deg, #fdf8ff 0%, #fbf9f5 100%) !important;
+}
+
+/* About page intro dark override — keep gradient */
+.page-intro-dark {
+  background: linear-gradient(140deg, #1e0a25 0%, #3a1540 40%, #5f2d67 80%, #7e3880 100%) !important;
+}
+.page-intro-dark::before {
+  background:
+    radial-gradient(ellipse at 75% 30%, rgba(214,162,224,.2) 0%, transparent 50%),
+    radial-gradient(ellipse at 15% 70%, rgba(139,82,207,.15) 0%, transparent 55%);
+}
+
+/* Eyebrow accent for dark sections */
+.eyebrow.light { color: rgba(255,250,245,.75); }
+
+/* Landing page extra polish */
+.landing-pillars { background: linear-gradient(160deg, #fdf8ff 0%, #f8f5ff 50%, #fbf9f5 100%) !important; }
+.pillar-grid > div { transition: background .2s var(--ease-out), transform .2s var(--ease-out); }
+.pillar-grid > div:hover { background: #fff; transform: translateY(-3px); }
+
+/* Lively landing summary section */
+.landing-summary { background: var(--paper) !important; }
+.landing-summary-emphasis { position: relative; overflow: hidden; }
+.landing-summary-emphasis::before {
+  content: "";
+  position: absolute;
+  width: 400px; height: 400px;
+  right: -80px; top: -100px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(167,38,134,.07), transparent 65%);
+  pointer-events: none;
+}
+
+/* Page-next nav strip */
+.page-next { background: linear-gradient(90deg, #ece4ef 0%, #eee5df 100%); }
+.page-next a:hover { color: var(--magenta); }
+
+/* Safeguarding callout */
+.safeguarding-callout {
+  background: linear-gradient(160deg, #fdf8ff 0%, var(--paper) 100%) !important;
+}
+
+/* NOT FOUND — accent */
+.not-found-page { background: linear-gradient(160deg, #fdf8ff 0%, #fbf9f5 100%) !important; }
+
+/* Info pages */
+.info-page-section { background: linear-gradient(160deg, #fdf8ff 0%, #fbf9f5 100%) !important; }
+
+/* Smooth transitions for all interactive cards */
+.focus-card, .involved-page-card, .values-grid article, .project-card {
+  will-change: transform;
+}
+
+/* Social link in footer — better spacing */
+.footer-socials { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 5px; }
+
+/* Enhanced public footer */
+.public-footer {
+  background: linear-gradient(160deg, #1a0b20 0%, #241029 60%, #2a1035 100%);
+}
+
+/* Hero team intro image presentation */
+.landing-team-frame {
+  position: absolute;
+  inset: 56px 20px 88px;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(0, 0, 0, 0.25);
+  display: flex;
+}
+
+.landing-team-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s var(--ease-out);
+}
+
+.landing-hero-object:hover .landing-team-photo {
+  transform: scale(1.03);
+}
+
+.landing-team-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(30, 10, 37, 0.05) 0%, rgba(30, 10, 37, 0.45) 100%);
+  pointer-events: none;
+}
+
+/* Discreet secret admin trigger */
+.secret-admin-trigger {
+  margin-left: auto;
+  opacity: 0.22;
+  color: var(--plum);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.secret-admin-trigger:hover {
+  opacity: 1;
+  color: var(--magenta);
+  background: rgba(110, 40, 109, 0.08);
+  transform: scale(1.15);
+}
+
+.network-center {
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.2s ease;
+}
+
+.network-center:hover {
+  transform: scale(1.08);
+}
+
