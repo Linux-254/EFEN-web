@@ -37,7 +37,7 @@ const settingsInput = z.object({
   faqs: z.array(z.object({ question: z.string().min(2).max(240), answer: z.string().min(2).max(3000) })).max(30),
   socialLinks: z.array(z.object({ platform: z.string().min(2).max(40), url: z.string().url().or(z.literal("")) })).max(12),
   contact: z.object({ email: z.string().email().or(z.literal("")), phone: z.string().max(80), whatsapp: z.string().max(80), address: z.string().max(240), safeguardingEmail: z.string().email().or(z.literal("")), safeguardingPhone: z.string().max(80) }),
-  about: z.object({ intro: z.string().min(10).max(1000), purposeTitle: z.string().min(2).max(240), purposeLead: z.string().min(10).max(1000), purposeBody: z.string().min(10).max(1500), vision: z.string().min(10).max(1000), mission: z.string().min(10).max(1500), valuesTitle: z.string().min(2).max(240), beliefsTitle: z.string().min(2).max(240) }),
+  about: z.object({ intro: z.string().min(10).max(1000), purposeTitle: z.string().min(2).max(240), purposeLead: z.string().min(10).max(1000), purposeBody: z.string().min(10).max(1500), vision: z.string().min(10).max(1000), mission: z.string().min(10).max(1500), valuesTitle: z.string().min(2).max(240), beliefsTitle: z.string().min(2).max(240), teamIntroImageUrl: z.string().url().or(z.literal("")), teamIntroTitle: z.string().max(160), teamIntroCaption: z.string().max(160), coreValues: z.array(z.string().min(1).max(80)).max(20), focusAreas: z.array(z.string().min(1).max(180)).max(20) }),
 });
 
 const pinAdminProcedure = publicProcedure.use(({ ctx, next }) => {

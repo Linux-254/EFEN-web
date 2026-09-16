@@ -550,7 +550,7 @@ h1 em, h2 em { color: #d39be2; font-style: italic; }
 /* Discreet secret admin trigger */
 .secret-admin-trigger {
   margin-left: auto;
-  opacity: 0.22;
+  opacity: 0.82;
   color: var(--plum);
   display: inline-flex;
   align-items: center;
@@ -560,6 +560,9 @@ h1 em, h2 em { color: #d39be2; font-style: italic; }
   transition: all 0.2s ease;
   cursor: pointer;
   text-decoration: none;
+  gap: 4px;
+  font-size: 10px;
+  font-weight: 700;
 }
 
 .secret-admin-trigger:hover {

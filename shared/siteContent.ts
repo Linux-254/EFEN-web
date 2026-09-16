@@ -12,6 +12,8 @@ export type AboutContent = {
   teamIntroImageUrl?: string;
   teamIntroTitle?: string;
   teamIntroCaption?: string;
+  coreValues?: string[];
+  focusAreas?: string[];
 };
 export type ProjectImageMeta = { url: string; caption: string; alt: string };
 export type ContactSettings = {
@@ -34,25 +36,27 @@ export const defaultFaqs: FaqItem[] = [
 ];
 
 export const defaultSocialLinks: SocialLink[] = [
-  { platform: "Facebook", url: "https://www.facebook.com/eminentfen" },
-  { platform: "LinkedIn", url: "" },
+  { platform: "Facebook", url: "https://www.facebook.com/friendsempowermentnetwork" },
+  { platform: "LinkedIn", url: "https://www.linkedin.com/company/eminent-friends-empowerment-network/" },
   { platform: "X", url: "https://x.com/eminentfen" },
   { platform: "Instagram", url: "" },
   { platform: "WhatsApp", url: "" },
   { platform: "TikTok", url: "https://www.tiktok.com/@eminentefen" },
 ];
 
-export const defaultContactSettings: ContactSettings = { email: "", phone: "", whatsapp: "", address: "Soroti City, Eastern Uganda", safeguardingEmail: "", safeguardingPhone: "" };
+export const defaultContactSettings: ContactSettings = { email: "friendsempowermentnetwork.org@gmail.com", phone: "+256779282748 / 0777 223139 / 0704443929", whatsapp: "+256779282748", address: "Soroti City, Eastern Uganda", safeguardingEmail: "", safeguardingPhone: "" };
 export const defaultAboutContent: AboutContent = {
   intro: "Eminent Friends Empowerment Network is a non-profit, non-political, non-sectarian and community-focused organization based in Soroti City, Eastern Uganda.",
   purposeTitle: "Building bridges between people and opportunity.",
   purposeLead: "We believe stronger relationships can open practical pathways to livelihoods, leadership, participation and lasting change.",
   purposeBody: "EFEN brings together communities, young people, professionals, mentors, institutions, businesses, development partners and other stakeholders to create a more inclusive, resilient and prosperous future.",
-  vision: "A world with stronger social connections and networks that empower people and communities to prosper.",
-  mission: "To empower individuals and communities through friendship and stronger social connections, advancing inclusive development, sustainable livelihoods, ethical leadership, innovation and partnerships for lasting prosperity.",
+  vision: "A world where friendship is the foundation for empowerment, development, inclusion, and transformation of individuals and communities.",
+  mission: "To build a global network of friends committed to personal growth, empowerment, and impact, using friendship as a force for positive change and active community engagement.",
   valuesTitle: "Values are the way the work feels.",
   beliefsTitle: "Connect. Empower. Act. Transform.",
   teamIntroImageUrl: "",
   teamIntroTitle: "A network in motion",
   teamIntroCaption: "Connect. Empower. Transform.",
+  coreValues: ["Unity", "Empowerment", "Service", "Inclusivity", "Resilience", "Innovation", "Integrity"],
+  focusAreas: ["Lifelong friendships & social support", "Economic empowerment & financial literacy", "Community service & charity initiatives", "Entrepreneurship & innovation", "Skills development & leadership training", "Adventure, wellness & recreation", "Diversity, inclusion & creative arts"],
 };

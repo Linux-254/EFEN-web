@@ -3,7 +3,7 @@ import { Link } from "wouter";
 import { PageIntro, PublicLayout, usePageMeta } from "@/components/PublicLayout";
 import { trpc } from "@/lib/trpc";
 
-const values = [["Integrity", "Honesty, transparency, accountability and professionalism."], ["Inclusion", "Equality, dignity, diversity and meaningful participation for all."], ["Innovation", "Creativity, learning, research and practical solutions."], ["Service", "Compassion, friendship, teamwork and responsible leadership."]];
+const values = [["Unity", "Friendship, solidarity and meaningful relationships."], ["Empowerment", "Skills, confidence, knowledge and opportunity."], ["Service", "Compassion, friendship, teamwork and responsible leadership."], ["Inclusivity", "Equality, dignity, diversity and meaningful participation for all."], ["Resilience", "Practical support for people and communities to thrive."], ["Innovation", "Creativity, learning, research and practical solutions."], ["Integrity", "Honesty, transparency, accountability and professionalism."]];
 export default function About() {
   usePageMeta("About EFEN", "Learn about EFEN's mission, vision, values and friendship-led approach to inclusive community development.");
   const settings = trpc.site.settings.useQuery();

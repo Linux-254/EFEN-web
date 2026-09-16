@@ -1,13 +1,14 @@
 import { ArrowDownRight, ArrowUpRight, Handshake, LockKeyhole, Network, Sparkles, UsersRound } from "lucide-react";
 import { Link } from "wouter";
-import { PublicLayout, lightLogoPath, logoPath, usePageMeta } from "@/components/PublicLayout";
+import { PublicLayout, logoPath, usePageMeta } from "@/components/PublicLayout";
 import { trpc } from "@/lib/trpc";
+import teamImage from "@/assets/efen-team.png";
 
 export default function Landing() {
   usePageMeta("Connect. Empower. Transform.", "Eminent Friends Empowerment Network connects people to skills, opportunities, mentors and networks in Soroti, Eastern Uganda.");
   const settings = trpc.site.settings.useQuery();
   const about = settings.data?.about;
-  const hasTeamImage = Boolean(about?.teamIntroImageUrl);
+  const hasTeamImage = true;
   const teamTitle = about?.teamIntroTitle || "A network in motion";
   const teamCaption = about?.teamIntroCaption || "Connect. Empower. Transform.";
 
@@ -21,7 +22,7 @@ export default function Landing() {
             <div className="object-label">{teamTitle}</div>
             {hasTeamImage ? (
               <div className="landing-team-frame">
-                <img src={about?.teamIntroImageUrl} alt={teamTitle} className="landing-team-photo" />
+                <img src={about?.teamIntroImageUrl || teamImage} alt="EFEN community members joining hands" className="landing-team-photo" />
                 <div className="landing-team-overlay" />
               </div>
             ) : (
@@ -42,7 +43,7 @@ export default function Landing() {
               <img src={logoPath} alt="EFEN" />
               <span>{teamCaption}</span>
               <Link href="/manage-efen" className="secret-admin-trigger" title="Admin Studio" aria-label="Admin Studio">
-                <LockKeyhole size={12} />
+                <LockKeyhole size={12} /> <span>Admin</span>
               </Link>
             </div>
           </div>

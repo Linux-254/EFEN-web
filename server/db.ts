@@ -116,7 +116,7 @@ export async function getSiteSettings(): Promise<EditableSiteSettings> {
   const storedContact = parseJson<Partial<ContactSettings>>(row.contact, {});
   return {
     faqs: parseJson(row.faqs, defaultFaqs),
-    socialLinks: parseJson(row.socialLinks, defaultSocialLinks),
+    socialLinks: [...parseJson<SocialLink[]>(row.socialLinks, defaultSocialLinks), ...defaultSocialLinks.filter((defaultLink) => !parseJson<SocialLink[]>(row.socialLinks, defaultSocialLinks).some((link) => link.platform.toLowerCase() === defaultLink.platform.toLowerCase()))],
     contact: { ...defaultContactSettings, ...storedContact },
     about: { ...defaultAboutContent, ...parseJson<Partial<AboutContent>>(row.about, {}) },
   };
