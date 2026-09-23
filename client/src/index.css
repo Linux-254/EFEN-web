@@ -585,3 +585,21 @@ h1 em, h2 em { color: #d39be2; font-style: italic; }
 .network-center:hover {
   transform: scale(1.08);
 }
+
+/* Admin project uploads and pre-save preview */
+.admin-upload-controls { position: relative; display: flex; align-items: center; gap: 8px; min-height: 38px; padding: 8px 11px; border: 1px dashed rgba(52,38,49,.28); background: #fffaf5; color: var(--plum); font-size: 12px; }
+.admin-upload-controls input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
+.admin-upload-controls span { display: inline-flex; align-items: center; gap: 7px; pointer-events: none; }
+.admin-image-fields { min-width: 0; }
+.admin-image-fields > input { min-width: 0; }
+.admin-editor-actions .button-light { display: inline-flex; align-items: center; gap: 8px; }
+.admin-project-preview { position: fixed; inset: 0; z-index: 120; display: grid; place-items: center; padding: 24px; background: rgba(26,11,32,.72); backdrop-filter: blur(7px); }
+.admin-project-preview-card { position: relative; width: min(720px, 100%); max-height: min(820px, 92vh); overflow: auto; padding: 28px; background: #fffaf5; color: var(--plum); box-shadow: 0 28px 90px rgba(12,4,16,.36); }
+.admin-preview-close { position: absolute; top: 14px; right: 14px; z-index: 2; background: rgba(255,250,245,.86); }
+.admin-preview-image { display: grid; place-items: center; min-height: 220px; max-height: 340px; margin: -28px -28px 24px; overflow: hidden; background: linear-gradient(135deg, #2a1230, #8d4b99); color: #e9bde7; }
+.admin-preview-image img { width: 100%; height: 100%; max-height: 340px; object-fit: cover; }
+.admin-project-preview-card h2 { margin: 12px 0 4px; font-family: var(--display); font-size: clamp(30px, 5vw, 54px); line-height: .98; }
+.admin-preview-category { margin: 0 0 18px; color: #886b86; font-size: 12px; text-transform: uppercase; letter-spacing: .12em; }
+.admin-project-preview-card .lead-copy { font-size: 17px; line-height: 1.55; }
+.admin-project-preview-card .button { margin-top: 18px; }
+@media (max-width: 600px) { .admin-editor-actions { align-items: stretch; flex-direction: column; } .admin-editor-actions button { justify-content: center; } .admin-project-preview { padding: 12px; } .admin-project-preview-card { padding: 22px; } .admin-preview-image { margin: -22px -22px 20px; } }

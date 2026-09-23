@@ -8,6 +8,7 @@ import { getSessionCookieOptions } from "./_core/cookies";
 import { systemRouter } from "./_core/systemRouter";
 import { publicProcedure, router } from "./_core/trpc";
 import { ENV } from "./_core/env";
+import { storagePut } from "./storage";
 
 const projectInput = z.object({
   slug: z.string().min(2).max(160),
@@ -103,6 +104,12 @@ export const appRouter = router({
       const { id, ...changes } = input;
       const { imageUrls, imageMeta, ...rest } = changes;
       return updateProject(id, { ...rest, imageUrl: rest.imageUrl || imageUrls?.[0] || null, imageUrls: imageUrls ? JSON.stringify(imageUrls) : undefined, imageMeta: imageMeta ? JSON.stringify(imageMeta) : undefined });
+    }),
+    uploadProjectImage: pinAdminProcedure.input(z.object({ filename: z.string().min(1).max(180), contentType: z.enum(["image/jpeg", "image/png", "image/webp", "image/gif"]), data: z.string().min(100).max(12_000_000) })).mutation(async ({ input }) => {
+      const bytes = Buffer.from(input.data, "base64");
+      if (bytes.length > 8 * 1024 * 1024) throw new TRPCError({ code: "BAD_REQUEST", message: "Image must be 8 MB or smaller" });
+      const safeName = input.filename.toLowerCase().replace(/[^a-z0-9._-]+/g, "-").slice(-120);
+      return storagePut(`efen/projects/${Date.now()}-${safeName}`, bytes, input.contentType);
     }),
     deleteProject: pinAdminProcedure.input(z.object({ id: z.number().int().positive() })).mutation(async ({ input }) => deleteProject(input.id)),
     settings: pinAdminProcedure.query(async () => getSiteSettings()),
