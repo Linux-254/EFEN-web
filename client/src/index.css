@@ -316,6 +316,10 @@ h1 em, h2 em { color: #d39be2; font-style: italic; }
 
 /* Subtle interior-page texture and content metadata */
 .public-site { background-color: var(--paper); background-image: radial-gradient(rgba(110,40,109,.055) .7px, transparent .7px), linear-gradient(120deg, transparent 0 43%, rgba(110,40,109,.025) 43.1% 43.25%, transparent 43.4%); background-size: 24px 24px, 420px 420px; }
+.about-opening-image { padding: 0 0 78px; background: rgba(251,249,245,.82); }
+.about-opening-image .container { position: relative; }
+.about-opening-image img { width: 100%; max-height: 440px; display: block; object-fit: cover; border-radius: 2px; box-shadow: 0 20px 50px rgba(45,17,45,.14); }
+.about-opening-image p { margin: 12px 0 0; color: #776b72; font-size: 12px; letter-spacing: .04em; }
 .page-intro, .content-section, .projects-section, .project-detail-section, .involved-page-section, .involved-form-section, .values-section { background-color: rgba(251,249,245,.82); }
 .admin-row-actions button { display: inline-flex; align-items: center; gap: 7px; }
 .admin-row-actions button span { font-size: 11px; font-weight: 700; white-space: nowrap; }
@@ -581,4 +585,3 @@ h1 em, h2 em { color: #d39be2; font-style: italic; }
 .network-center:hover {
   transform: scale(1.08);
 }
-

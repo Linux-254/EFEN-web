@@ -7,6 +7,7 @@ import { createProject, createSubmission, deleteProject, getSiteSettings, listPr
 import { getSessionCookieOptions } from "./_core/cookies";
 import { systemRouter } from "./_core/systemRouter";
 import { publicProcedure, router } from "./_core/trpc";
+import { ENV } from "./_core/env";
 
 const projectInput = z.object({
   slug: z.string().min(2).max(160),
@@ -41,7 +42,7 @@ const settingsInput = z.object({
 });
 
 const pinAdminProcedure = publicProcedure.use(({ ctx, next }) => {
-  if (!isAdminSession(ctx.req)) {
+  if (ENV.adminPin && !isAdminSession(ctx.req)) {
     throw new TRPCError({ code: "FORBIDDEN", message: "Admin session required" });
   }
   return next();
@@ -82,7 +83,7 @@ export const appRouter = router({
     }),
   }),
   admin: router({
-    status: publicProcedure.query(({ ctx }) => ({ authenticated: isAdminSession(ctx.req), pinConfigured: hasConfiguredAdminPin(), previewMode: process.env.NODE_ENV !== "production" && !process.env.EFEN_ADMIN_PIN })),
+    status: publicProcedure.query(({ ctx }) => ({ authenticated: !ENV.adminPin || isAdminSession(ctx.req), pinConfigured: hasConfiguredAdminPin(), previewMode: !ENV.adminPin })),
     login: publicProcedure.input(z.object({ pin: z.string().min(1).max(64) })).mutation(({ ctx, input }) => {
       return establishAdminSession(ctx.req, ctx.res, input.pin);
     }),

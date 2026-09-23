@@ -2,7 +2,7 @@ import { ArrowDownRight, ArrowUpRight, Handshake, Network, Sparkles, UsersRound 
 import { Link } from "wouter";
 import { PublicLayout, logoPath, usePageMeta } from "@/components/PublicLayout";
 import { trpc } from "@/lib/trpc";
-import teamImage from "@/assets/efen-team.png";
+import teamImage from "@/assets/efen-comm2.jpeg";
 
 export default function Landing() {
   usePageMeta("Connect. Empower. Transform.", "Eminent Friends Empowerment Network connects people to skills, opportunities, mentors and networks in Soroti, Eastern Uganda.");
