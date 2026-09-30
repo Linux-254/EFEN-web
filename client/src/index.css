@@ -649,3 +649,34 @@ h1 em, h2 em { color: #d39be2; font-style: italic; }
 .contact-modal-actions { display: flex; align-items: center; justify-content: flex-end; gap: 12px; flex-wrap: wrap; margin-top: 3px; }
 @media (max-width: 820px) { .contact-page-grid { grid-template-columns: 1fr; gap: 42px; } .contact-channel-grid { grid-template-columns: 1fr; } .contact-channel-grid article { border-right: 0; border-bottom: 1px solid rgba(52,38,49,.13); } .contact-channel-grid article:last-child { border-bottom: 0; } .contact-next-grid { align-items: flex-start; flex-direction: column; } }
 @media (max-width: 560px) { .contact-page-section { padding: 74px 0; } .contact-channels-section { padding-bottom: 74px; } .contact-modal { padding: 24px 20px; } .contact-modal-actions { align-items: stretch; flex-direction: column; } .contact-modal-actions .button, .contact-modal-actions .text-button { justify-content: center; } }
+
+
+/* Mobile performance and responsive refinement */
+.public-footer-location span { min-width: 0; overflow-wrap: anywhere; }
+.public-footer-location a { overflow-wrap: anywhere; }
+.professional-email-card { min-width: 0; }
+.professional-email-card > div:nth-child(2) a { max-width: 100%; }
+.contact-channel-grid strong { overflow-wrap: anywhere; }
+.admin-upload-controls { touch-action: manipulation; }
+@media (max-width: 600px) {
+  .public-footer-main { grid-template-columns: 1fr; gap: 28px; }
+  .public-footer-brand, .public-footer-links, .public-footer-location { grid-column: 1; }
+  .public-footer-links { gap: 10px; padding-top: 4px; }
+  .public-footer-links span { margin-bottom: 2px; }
+  .public-footer-bottom { align-items: flex-start; padding-bottom: 24px; }
+  .contact-page-grid { gap: 32px; }
+  .professional-email-card { align-items: flex-start; padding: 16px 14px; }
+  .professional-email-icon { flex: 0 0 38px; width: 38px; height: 38px; }
+  .professional-email-card span { font-size: 10px; letter-spacing: .08em; }
+  .professional-email-card a { font-size: 14px; line-height: 1.35; }
+  .professional-email-card .icon-button { flex: 0 0 34px; width: 34px; height: 34px; }
+  .contact-channel-grid article { min-height: 126px; padding: 20px 18px; }
+  .contact-channel-grid span { margin-top: 12px; }
+  .contact-channel-grid strong { font-size: 20px; }
+}
+@media (max-width: 380px) {
+  .container { padding-left: 16px; padding-right: 16px; }
+  .professional-email-card { gap: 10px; }
+  .professional-email-card a { font-size: 13px; }
+  .contact-modal { max-width: calc(100% - 1rem); padding: 20px 16px; }
+}
