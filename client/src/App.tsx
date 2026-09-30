@@ -6,6 +6,7 @@ import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import About from "./pages/About";
 import Admin from "./pages/Admin";
+import Contact from "./pages/Contact";
 import Faqs from "./pages/Faqs";
 import Involved from "./pages/Involved";
 import InfoPage from "./pages/InfoPage";
@@ -22,6 +23,7 @@ function Router() {
       <Route path={"/work"} component={Work} />
       <Route path={"/work/:slug"} component={ProjectDetail} />
       <Route path={"/involved"} component={Involved} />
+      <Route path={"/contact"} component={Contact} />
       <Route path={"/faqs"} component={Faqs} />
       <Route path={"/safeguarding"} component={InfoPage} />
       <Route path={"/privacy"} component={InfoPage} />

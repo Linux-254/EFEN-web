@@ -26,7 +26,7 @@ const projectUpdate = projectInput.partial().extend({ id: z.number().int().posit
 
 const submissionInput = z.object({
   type: z.enum(["contact", "opportunity"]),
-  pathway: z.enum(["member", "volunteer", "partner", "opportunity"]),
+  pathway: z.enum(["general", "member", "volunteer", "partner", "opportunity"]),
   name: z.string().min(2).max(180),
   email: z.string().email().max(320),
   phone: z.string().max(80).optional().or(z.literal("")),

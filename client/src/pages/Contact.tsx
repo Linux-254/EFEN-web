@@ -1,0 +1,16 @@
+import { ArrowUpRight, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
+import { Link } from "wouter";
+import ContactModal from "@/components/ContactModal";
+import { PageIntro, PublicLayout, usePageMeta } from "@/components/PublicLayout";
+import { trpc } from "@/lib/trpc";
+import { professionalRoleLabels } from "../../../shared/siteContent";
+
+const whatsappNumber = (value: string) => value.replace(/\D/g, "");
+
+export default function Contact() {
+  usePageMeta("Contact us", "Reach the EFEN team through the professional role and contact channel that fits your message.");
+  const settings = trpc.site.settings.useQuery();
+  const contact = settings.data?.contact;
+  const emails = contact?.professionalEmails?.filter((item) => item.email) ?? [];
+  return <PublicLayout><main><PageIntro eyebrow="Contact us" title={<>Find the right <em>door</em> into the network.</>} copy="Choose a professional role, send a direct message, or use the official channels below. Every route starts with a human connection." /><section className="contact-page-section"><div className="container contact-page-grid"><div className="contact-page-intro"><span className="eyebrow"><i className="eyebrow-line" /> Professional contacts</span><h2>Clear routes for useful conversations.</h2><p>Whether you are looking to participate, partner, volunteer or share an opportunity, direct your message to the team closest to it.</p><ContactModal trigger={<button className="button button-dark" type="button">Choose a role to message <ArrowUpRight size={16} /></button>} /></div><div className="professional-email-list" aria-live="polite">{settings.isLoading ? <div className="contact-loading">Loading official contacts…</div> : emails.length ? emails.map((item) => <article className="professional-email-card" key={item.role}><div className="professional-email-icon"><Mail size={19} /></div><div><span>{professionalRoleLabels[item.role]}</span><a href={`mailto:${item.email}`}>{item.email}</a></div><ContactModal trigger={<button type="button" className="icon-button" aria-label={`Message ${professionalRoleLabels[item.role]}`}><ArrowUpRight size={17} /></button>} /></article>) : <div className="contact-empty">Professional email addresses will appear here once the EFEN administrator confirms them.</div>}</div></div></section><section className="contact-channels-section"><div className="container contact-channel-grid"><article><MapPin size={20} /><span>Head office</span><strong>{contact?.address || "Soroti City, Eastern Uganda"}</strong></article><article><Phone size={20} /><span>Telephone</span><strong>{contact?.phone ? <a href={`tel:${contact.phone}`}>{contact.phone}</a> : "To be confirmed"}</strong></article><article><MessageCircle size={20} /><span>WhatsApp</span><strong>{contact?.whatsapp ? <a href={`https://wa.me/${whatsappNumber(contact.whatsapp)}`} target="_blank" rel="noreferrer">Message EFEN</a> : "To be confirmed"}</strong></article></div></section><section className="contact-next-section"><div className="container contact-next-grid"><div><span className="eyebrow light"><i className="eyebrow-line" /> Keep exploring</span><h2>Want to participate instead?</h2></div><Link className="button button-light" href="/involved">See ways to get involved <ArrowUpRight size={16} /></Link></div></section></main></PublicLayout>;
+}

@@ -18,6 +18,13 @@ export type AboutContent = {
 export type ProjectImageMeta = { url: string; caption: string; alt: string };
 export type ContactRole = "general" | "member" | "volunteer" | "partner" | "opportunity";
 export type ProfessionalEmail = { role: ContactRole; email: string };
+export const professionalRoleLabels: Record<ContactRole, string> = {
+  general: "General enquiries",
+  member: "Membership",
+  volunteer: "Volunteering",
+  partner: "Partnerships",
+  opportunity: "Opportunities",
+};
 export type ContactSettings = {
   email: string;
   professionalEmails: ProfessionalEmail[];
