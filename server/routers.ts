@@ -38,11 +38,22 @@ const submissionInput = z.object({
 const settingsInput = z.object({
   faqs: z.array(z.object({ question: z.string().min(2).max(240), answer: z.string().min(2).max(3000) })).max(30),
   socialLinks: z.array(z.object({ platform: z.string().min(2).max(40), url: z.string().url().or(z.literal("")) })).max(12),
-  contact: z.object({ email: z.string().email().or(z.literal("")), phone: z.string().max(80), whatsapp: z.string().max(80), address: z.string().max(240), safeguardingEmail: z.string().email().or(z.literal("")), safeguardingPhone: z.string().max(80) }),
+  contact: z.object({
+    email: z.string().email().or(z.literal("")),
+    professionalEmails: z.array(z.object({ role: z.enum(["general", "member", "volunteer", "partner", "opportunity"]), email: z.string().email().or(z.literal("")) })).max(5),
+    phone: z.string().max(80),
+    whatsapp: z.string().max(80),
+    address: z.string().max(240),
+    safeguardingEmail: z.string().email().or(z.literal("")),
+    safeguardingPhone: z.string().max(80),
+  }),
   about: z.object({ intro: z.string().min(10).max(1000), purposeTitle: z.string().min(2).max(240), purposeLead: z.string().min(10).max(1000), purposeBody: z.string().min(10).max(1500), vision: z.string().min(10).max(1000), mission: z.string().min(10).max(1500), valuesTitle: z.string().min(2).max(240), beliefsTitle: z.string().min(2).max(240), teamIntroImageUrl: z.string().url().or(z.literal("")), teamIntroTitle: z.string().max(160), teamIntroCaption: z.string().max(160), coreValues: z.array(z.string().min(1).max(80)).max(20), focusAreas: z.array(z.string().min(1).max(180)).max(20) }),
 });
 
 const pinAdminProcedure = publicProcedure.use(({ ctx, next }) => {
+  if (ENV.isProduction && !ENV.adminPin) {
+    throw new TRPCError({ code: "PRECONDITION_FAILED", message: "Admin access is not configured for this deployment" });
+  }
   if (ENV.adminPin && !isAdminSession(ctx.req)) {
     throw new TRPCError({ code: "FORBIDDEN", message: "Admin session required" });
   }
@@ -84,7 +95,7 @@ export const appRouter = router({
     }),
   }),
   admin: router({
-    status: publicProcedure.query(({ ctx }) => ({ authenticated: !ENV.adminPin || isAdminSession(ctx.req), pinConfigured: hasConfiguredAdminPin(), previewMode: !ENV.adminPin })),
+    status: publicProcedure.query(({ ctx }) => ({ authenticated: !ENV.adminPin && !ENV.isProduction || isAdminSession(ctx.req), pinConfigured: hasConfiguredAdminPin(), previewMode: !ENV.adminPin && !ENV.isProduction, production: ENV.isProduction, configurationError: ENV.isProduction && !ENV.adminPin ? "EFEN_ADMIN_PIN is not configured for this deployment." : null })),
     login: publicProcedure.input(z.object({ pin: z.string().min(1).max(64) })).mutation(({ ctx, input }) => {
       return establishAdminSession(ctx.req, ctx.res, input.pin);
     }),

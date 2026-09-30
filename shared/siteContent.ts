@@ -16,8 +16,11 @@ export type AboutContent = {
   focusAreas?: string[];
 };
 export type ProjectImageMeta = { url: string; caption: string; alt: string };
+export type ContactRole = "general" | "member" | "volunteer" | "partner" | "opportunity";
+export type ProfessionalEmail = { role: ContactRole; email: string };
 export type ContactSettings = {
   email: string;
+  professionalEmails: ProfessionalEmail[];
   phone: string;
   whatsapp: string;
   address: string;
@@ -44,7 +47,21 @@ export const defaultSocialLinks: SocialLink[] = [
   { platform: "TikTok", url: "https://www.tiktok.com/@eminentefen" },
 ];
 
-export const defaultContactSettings: ContactSettings = { email: "friendsempowermentnetwork.org@gmail.com", phone: "+256779282748 / 0777 223139 / 0704443929", whatsapp: "+256779282748", address: "Soroti City, Eastern Uganda", safeguardingEmail: "", safeguardingPhone: "" };
+export const defaultContactSettings: ContactSettings = {
+  email: "friendsempowermentnetwork.org@gmail.com",
+  professionalEmails: [
+    { role: "general", email: "friendsempowermentnetwork.org@gmail.com" },
+    { role: "member", email: "" },
+    { role: "volunteer", email: "" },
+    { role: "partner", email: "" },
+    { role: "opportunity", email: "" },
+  ],
+  phone: "+256779282748 / 0777 223139 / 0704443929",
+  whatsapp: "+256779282748",
+  address: "Soroti City, Eastern Uganda",
+  safeguardingEmail: "",
+  safeguardingPhone: "",
+};
 export const defaultAboutContent: AboutContent = {
   intro: "Eminent Friends Empowerment Network is a non-profit, non-political, non-sectarian and community-focused organization based in Soroti City, Eastern Uganda.",
   purposeTitle: "Building bridges between people and opportunity.",

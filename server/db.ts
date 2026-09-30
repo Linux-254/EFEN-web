@@ -100,6 +100,15 @@ export async function deleteProject(id: number) {
 
 export type EditableSiteSettings = { faqs: FaqItem[]; socialLinks: SocialLink[]; contact: ContactSettings; about: AboutContent };
 
+function normalizeProfessionalEmails(value: Partial<ContactSettings>["professionalEmails"]): ContactSettings["professionalEmails"] {
+  const defaults = defaultContactSettings.professionalEmails;
+  const stored = Array.isArray(value) ? value : [];
+  return defaults.map((fallback) => {
+    const match = stored.find((item) => item?.role === fallback.role);
+    return { role: fallback.role, email: typeof match?.email === "string" ? match.email : fallback.email };
+  });
+}
+
 function parseJson<T>(value: string, fallback: T): T {
   try {
     return JSON.parse(value) as T;
@@ -117,7 +126,7 @@ export async function getSiteSettings(): Promise<EditableSiteSettings> {
   return {
     faqs: parseJson(row.faqs, defaultFaqs),
     socialLinks: [...parseJson<SocialLink[]>(row.socialLinks, defaultSocialLinks), ...defaultSocialLinks.filter((defaultLink) => !parseJson<SocialLink[]>(row.socialLinks, defaultSocialLinks).some((link) => link.platform.toLowerCase() === defaultLink.platform.toLowerCase()))],
-    contact: { ...defaultContactSettings, ...storedContact },
+    contact: { ...defaultContactSettings, ...storedContact, professionalEmails: normalizeProfessionalEmails(storedContact.professionalEmails) },
     about: { ...defaultAboutContent, ...parseJson<Partial<AboutContent>>(row.about, {}) },
   };
 }
