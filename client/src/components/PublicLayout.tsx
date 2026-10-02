@@ -86,7 +86,7 @@ export function PublicFooter() {
         <div className="public-footer-links"><span>Participate</span><Link href="/involved">Get involved</Link><Link href="/involved?type=partner">Partner with EFEN</Link><Link href="/contact">Contact us</Link><Link href="/safeguarding">Safeguarding</Link></div>
         <div className="public-footer-location"><MapPin size={16} /><span>Head office<br /><strong>{contact?.address || "Soroti City, Eastern Uganda"}</strong>{contact?.email && <><br /><a href={`mailto:${contact.email}`}>{contact.email}</a></>}{contact?.phone && <><br /><a href={`tel:${contact.phone}`}>{contact.phone}</a></>}{contact?.whatsapp && <><br /><a href={`https://wa.me/${contact.whatsapp.replace(/\D/g, "")}`} target="_blank" rel="noreferrer">WhatsApp EFEN</a></>}</span></div>
       </div>
-      <div className="container public-footer-bottom"><span>© EFEN — Eminent Friends Empowerment Network</span><span>Connect. Empower. Transform.</span><Link href="/privacy">Privacy &amp; safeguarding</Link><Link className="footer-admin-link" href="/manage-efen" aria-label="Admin Studio" title="Admin Studio"><LockKeyhole size={14} /></Link></div>
+      <div className="container public-footer-bottom"><span>© EFEN — Eminent Friends Empowerment Network</span><span>Connect. Empower. Transform.</span><Link href="/privacy">Privacy &amp; safeguarding</Link><Link className="footer-admin-link" href="/admin" aria-label="Open Admin Studio" title="Admin Studio"><LockKeyhole size={14} /><span>Admin Studio</span></Link></div>
     </footer>
   );
 }

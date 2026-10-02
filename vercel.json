@@ -4,6 +4,8 @@
   "framework": "vite",
   "rewrites": [
     { "source": "/api/(.*)", "destination": "/api" },
+    { "source": "/admin", "destination": "/index.html" },
+    { "source": "/admin/(.*)", "destination": "/index.html" },
     { "source": "/manage-efen", "destination": "/index.html" },
     { "source": "/manage-efen/(.*)", "destination": "/index.html" },
     { "source": "/(.*)", "destination": "/index.html" }

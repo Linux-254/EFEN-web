@@ -27,6 +27,8 @@ function Router() {
       <Route path={"/faqs"} component={Faqs} />
       <Route path={"/safeguarding"} component={InfoPage} />
       <Route path={"/privacy"} component={InfoPage} />
+      <Route path={"/admin"} component={Admin} />
+      <Route path={"/admin/projects"} component={Admin} />
       <Route path={"/manage-efen"} component={Admin} />
       <Route path={"/manage-efen/projects"} component={Admin} />
       <Route path={"/404"} component={NotFound} />

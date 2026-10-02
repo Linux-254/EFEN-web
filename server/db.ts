@@ -2,9 +2,11 @@ import { asc, desc, eq } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
 import { InsertProject, InsertSubmission, InsertUser, projects, siteSettings, submissions, users } from "../drizzle/schema";
 import { AboutContent, ContactSettings, defaultAboutContent, defaultContactSettings, defaultFaqs, defaultSocialLinks, FaqItem, SocialLink } from "../shared/siteContent";
+import { previewProjects } from "./content";
 import { ENV } from "./_core/env";
 
 let _db: ReturnType<typeof drizzle> | null = null;
+let projectSeedPromise: Promise<void> | null = null;
 
 // Lazily create the drizzle instance so local tooling can run without a DB.
 export async function getDb() {
@@ -70,8 +72,22 @@ export async function getUserByOpenId(openId: string) {
 export async function listProjects(status?: "draft" | "published") {
   const db = await getDb();
   if (!db) return [];
+  await ensurePreviewProjects(db);
   const query = db.select().from(projects).orderBy(desc(projects.publishedAt));
   return status ? query.where(eq(projects.status, status)) : query;
+}
+
+async function ensurePreviewProjects(db: ReturnType<typeof drizzle>) {
+  if (projectSeedPromise) return projectSeedPromise;
+  projectSeedPromise = (async () => {
+    const existing = await db.select({ id: projects.id }).from(projects).limit(1);
+    if (existing.length) return;
+    await db.insert(projects).values(previewProjects.map(({ id: _id, ...project }) => project));
+  })().catch((error) => {
+    projectSeedPromise = null;
+    console.warn("[Database] Could not seed EFEN projects:", error);
+  });
+  return projectSeedPromise;
 }
 
 export async function createProject(input: InsertProject) {
