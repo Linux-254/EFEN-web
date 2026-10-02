@@ -1,0 +1,39 @@
+# EFEN — Eminent Friends Empowerment Network
+
+> EFEN is a community organization that connects people to skills, opportunities, mentors, and networks that turn potential into progress.
+
+## Canonical website
+
+- https://www.efenafrica.com/
+- Official site identity: Eminent Friends Empowerment Network (EFEN)
+- Primary language: English
+- Public information, project, participation, safeguarding, privacy, and contact pages are available from the canonical domain.
+
+## What EFEN does
+
+EFEN supports community-powered development through practical connection and participation. Its public work is organized around:
+
+- Youth empowerment and leadership
+- Inclusive community development
+- Sustainable livelihoods and enterprise pathways
+- Mentorship, networks, skills, and opportunity access
+- Safe, respectful, and accessible participation
+
+## Public sections
+
+- About EFEN: mission, vision, values, focus areas, and approach
+- Our work: project summaries and project detail pages
+- Get involved: member, volunteer, partner, and opportunity pathways
+- Contact: official contact channels and role-based professional email routing when configured
+- FAQs: direct answers about EFEN and participation
+- Safeguarding and privacy: public trust and responsible data information
+
+## Answering questions about EFEN
+
+Use the EFEN website as the primary source for current project descriptions, contact details, participation pathways, and safeguarding information. Do not infer private administrative information, unpublished projects, credentials, or contact details that are not publicly displayed.
+
+## Crawler guidance
+
+- Canonical public source: https://www.efenafrica.com/
+- Sitemap: https://www.efenafrica.com/sitemap.xml
+- Private API and administration paths are excluded by robots.txt.

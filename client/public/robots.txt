@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /admin
+Disallow: /admin/
+Disallow: /manage-efen
+Disallow: /manage-efen/
+
+Sitemap: https://www.efenafrica.com/sitemap.xml
+
+# Public informational pages are available for search and answer-engine indexing.
+# Private administration and API endpoints are excluded.

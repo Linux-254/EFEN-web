@@ -20,9 +20,15 @@ const navItems = [
 
 export function usePageMeta(title: string, description: string) {
   useEffect(() => {
+    const canonicalUrl = `https://www.efenafrica.com${window.location.pathname}`;
     document.title = `${title} | EFEN`;
     const descriptionTag = document.querySelector('meta[name="description"]');
     descriptionTag?.setAttribute("content", description);
+    document.querySelector('meta[property="og:title"]')?.setAttribute("content", `${title} | EFEN`);
+    document.querySelector('meta[property="og:description"]')?.setAttribute("content", description);
+    document.querySelector('meta[property="og:url"]')?.setAttribute("content", canonicalUrl);
+    const canonical = document.querySelector<HTMLLinkElement>('link[rel="canonical"]');
+    canonical?.setAttribute("href", canonicalUrl);
   }, [title, description]);
 }
 

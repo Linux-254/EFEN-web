@@ -2,6 +2,14 @@
   "buildCommand": "pnpm build",
   "outputDirectory": "dist/public",
   "framework": "vite",
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "destination": "https://www.efenafrica.com/$1",
+      "permanent": true,
+      "has": [{ "type": "host", "value": "efen.vercel.app" }]
+    }
+  ],
   "rewrites": [
     { "source": "/api/(.*)", "destination": "/api" },
     { "source": "/admin", "destination": "/index.html" },
