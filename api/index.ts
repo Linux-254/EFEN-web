@@ -7,9 +7,7 @@ type AppHandler = (req: Request, res: Response) => unknown;
 let appHandlerPromise: Promise<AppHandler> | null = null;
 
 async function createAppHandler(): Promise<AppHandler> {
-  const [{ registerOAuthRoutes }, { registerStorageProxy }, { createContext }, { appRouter }] = await Promise.all([
-    import("../server/_core/oauth"),
-    import("../server/_core/storageProxy"),
+  const [{ createContext }, { appRouter }] = await Promise.all([
     import("../server/_core/context"),
     import("../server/routers"),
   ]);
@@ -17,9 +15,6 @@ async function createAppHandler(): Promise<AppHandler> {
   const app = express();
   app.use(express.json({ limit: "50mb" }));
   app.use(express.urlencoded({ limit: "50mb", extended: true }));
-  registerStorageProxy(app);
-  registerOAuthRoutes(app);
-
   const trpcHandler = createExpressMiddleware({ router: appRouter, createContext });
   app.use("/api/trpc", trpcHandler);
   app.use("/trpc", trpcHandler);
