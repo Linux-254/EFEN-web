@@ -11,9 +11,10 @@ let projectSeedPromise: Promise<void> | null = null;
 
 // Lazily create the drizzle instance so local tooling can run without a DB.
 export async function getDb() {
-  if (!_db && process.env.DATABASE_URL) {
+  const dbUrl = ENV.databaseUrl || process.env.DATABASE_URL;
+  if (!_db && dbUrl) {
     try {
-      _db = drizzle(postgres(process.env.DATABASE_URL, { max: 3, prepare: false }));
+      _db = drizzle(postgres(dbUrl, { max: 3, prepare: false }));
     } catch (error) {
       console.warn("[Database] Failed to connect:", error);
       _db = null;

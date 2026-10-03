@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { TRPCError } from "@trpc/server";
-import { COOKIE_NAME } from "@shared/const";
+import { COOKIE_NAME } from "../shared/const";
 import { previewProjects } from "./content";
 import { clearAdminSession, establishAdminSession, hasConfiguredAdminPin, isAdminSession } from "./adminAccess";
 import { createProject, createSubmission, deleteProject, getSiteSettings, listProjects, listSubmissions, saveSiteSettings, updateProject, updateSubmissionStatus } from "./db";
