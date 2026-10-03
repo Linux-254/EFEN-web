@@ -1,5 +1,6 @@
 import { asc, desc, eq } from "drizzle-orm";
-import { drizzle } from "drizzle-orm/mysql2";
+import { drizzle } from "drizzle-orm/postgres-js";
+import postgres from "postgres";
 import { InsertProject, InsertSubmission, InsertUser, projects, siteSettings, submissions, users } from "../drizzle/schema";
 import { AboutContent, ContactSettings, defaultAboutContent, defaultContactSettings, defaultFaqs, defaultSocialLinks, FaqItem, SocialLink } from "../shared/siteContent";
 import { previewProjects } from "./content";
@@ -12,7 +13,7 @@ let projectSeedPromise: Promise<void> | null = null;
 export async function getDb() {
   if (!_db && process.env.DATABASE_URL) {
     try {
-      _db = drizzle(process.env.DATABASE_URL);
+      _db = drizzle(postgres(process.env.DATABASE_URL, { max: 3, prepare: false }));
     } catch (error) {
       console.warn("[Database] Failed to connect:", error);
       _db = null;
@@ -54,7 +55,7 @@ export async function upsertUser(user: InsertUser): Promise<void> {
   }
   values.lastSignedIn ??= new Date();
   if (Object.keys(updateSet).length === 0) updateSet.lastSignedIn = new Date();
-  await db.insert(users).values(values).onDuplicateKeyUpdate({ set: updateSet });
+  await db.insert(users).values(values).onConflictDoUpdate({ target: users.openId, set: updateSet });
 }
 
 export async function getUserByOpenId(openId: string) {
@@ -93,8 +94,8 @@ async function ensurePreviewProjects(db: ReturnType<typeof drizzle>) {
 export async function createProject(input: InsertProject) {
   const db = await getDb();
   if (!db) throw new Error("Database is not configured");
-  const result = await db.insert(projects).values(input);
-  const id = Number(result[0].insertId);
+  const result = await db.insert(projects).values(input).returning({ id: projects.id });
+  const id = result[0].id;
   const rows = await db.select().from(projects).where(eq(projects.id, id)).limit(1);
   return rows[0];
 }
@@ -160,8 +161,8 @@ export async function saveSiteSettings(input: EditableSiteSettings) {
 export async function createSubmission(input: InsertSubmission) {
   const db = await getDb();
   if (!db) throw new Error("Database is not configured");
-  const result = await db.insert(submissions).values(input);
-  const id = Number(result[0].insertId);
+  const result = await db.insert(submissions).values(input).returning({ id: submissions.id });
+  const id = result[0].id;
   return (await db.select().from(submissions).where(eq(submissions.id, id)).limit(1))[0];
 }
 
